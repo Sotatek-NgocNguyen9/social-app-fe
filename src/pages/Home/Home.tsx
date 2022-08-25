@@ -1,16 +1,5 @@
-import {
-  Box,
-  Typography,
-  TextField,
-  AppBar,
-  Toolbar,
-  Paper,
-  Stack,
-  Grid,
-  styled,
-} from "@mui/material";
-import Logo from "../../assets/logo.png";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { Box, Paper, Grid, styled } from "@mui/material";
+import Header from "src/components/Header/Header";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -21,30 +10,21 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Home = () => {
   return (
-    <Box>
-      <AppBar
-        sx={{ backgroundColor: "#fff", position: "fixed" }}
-        elevation={0}
+    <Box position="fixed" width="100%">
+      <Header />
+      <Box
+        flex={1}
+        overflow="auto"
+        mt={3}
+        mx={12}
       >
-        <Toolbar>
-          <Box
-            component="img"
-            sx={{
-              height: 48,
-            }}
-            alt="Your logo."
-            src={Logo}
-          />
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-          <Stack direction="row" alignItems="center" gap={1}>
-            <AddCircleIcon />
-            <Typography variant="body1">text</Typography>
-          </Stack>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
-      <Box>
-        <Grid container spacing={3}>
+        <Grid
+          container
+          spacing={5}
+          sx={{
+            height: "100vh",
+          }}
+        >
           <Grid item xs>
             <Item>xs</Item>
           </Grid>

@@ -14,6 +14,7 @@
     "@types/node": "16.11.46",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
+    "cross-env": "^7.0.3",
     "formik": "^2.2.9",
     "normalize.css": "^8.0.1",
     "react": "18.2.0",
@@ -22,6 +23,7 @@
     "react-scripts": "5.0.1",
     "typescript": "4.7.4",
     "web-vitals": "2.1.4",
+    "webpack": "^5.74.0",
     "yup": "^0.32.11"
   },
   "scripts": {

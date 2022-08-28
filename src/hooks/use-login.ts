@@ -26,18 +26,24 @@ const useLogin = () => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values) => {
-      const response = await AuthService.signIn({
+      AuthService.signIn({
         username: values.email,
         password: values.password,
+      }).then((response) => {
+        if (response.status === 201) {
+          setAuthenticatedState(true);
+          navigate("/");
+        }
+      }).catch((error) => {
+        if (error.response.status === 400) {
+          setShowErrorModal(true);
+        }
       });
-      if (response.status === 200) {
-        setAuthenticatedState(true);
-        navigate("/");
-      }
     },
   });
 
   const [showPassword, setShowPassword] = useState(true);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleShowPasswordChange = () => {
     setShowPassword(!showPassword);
@@ -46,6 +52,7 @@ const useLogin = () => {
   return {
     loginFormik,
     showPassword,
+    showErrorModal,
     handleShowPasswordChange,
   };
 };

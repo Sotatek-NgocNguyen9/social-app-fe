@@ -16,9 +16,11 @@ import { ReactComponent as HomeIcon } from "../../assets/svg/home.svg";
 import { ReactComponent as WatchIcon } from "../../assets/svg/watch.svg";
 import { ReactComponent as MarketplaceIcon } from "../../assets/svg/marketplace.svg";
 import { ReactComponent as GroupIcon } from "../../assets/svg/group.svg";
+import AuthContext from "../../contexts/auth-context";
 
 const Header = () => {
   const userContext = useContext(UserContext);
+  const authContext = useContext(AuthContext);
 
   return (
     <AppBar
@@ -122,8 +124,11 @@ const Header = () => {
             gap={1}
             ml={16}
           >
-            <Avatar src="/src/assets/defaultAvatar.png"/>
-            <Typography color="#000" variant="h6">
+            <Avatar
+              onClick={authContext.logOut}
+              src="/src/assets/defaultAvatar.png"
+            />
+            <Typography onClick={authContext.logOut} color="#000" variant="h6">
               {userContext.name}
             </Typography>
           </Stack>

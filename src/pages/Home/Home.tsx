@@ -5,14 +5,17 @@ import Header from "src/components/Header/Header";
 import UserContext from "src/contexts/user-context";
 import Birthday from "../../components/Birthday/Birthday";
 import FriendReq from "../../components/FriendReq/FriendReq";
+import AuthContext from "../../contexts/auth-context";
 
 const Home = () => {
+  const authContext = useContext(AuthContext);
   const userContext = useContext(UserContext);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
+      // await authContext.generateNewAccessToken();
       await userContext.setUser({
         userId: 1,
         username: "nguyenquynhanh@gmail.com",
@@ -32,9 +35,7 @@ const Home = () => {
       fetchUser().catch(console.error);
       setLoading(false);
     }, 1000);
-  }, [userContext]);
-
-  console.log(loading);
+  }, []);
 
   return (
     <Box position="fixed" width="100%">

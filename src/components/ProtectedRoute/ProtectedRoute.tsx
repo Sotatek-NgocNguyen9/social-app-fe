@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
-import useAuth from "../../hooks/use-auth";
+import useLocalStorage from "../../hooks/use-local-storage";
 
 const ProtectedRoute = (props: any) => {
-  const { isAuthenticated } = useAuth();
+  const [isAuthenticated, ] = useLocalStorage("isAuthenticated", false);
 
   if (isAuthenticated) {
     return props.children;

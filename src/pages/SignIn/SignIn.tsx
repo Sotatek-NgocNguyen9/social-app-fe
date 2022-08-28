@@ -15,6 +15,7 @@ const SignIn = () => {
   const {
     loginFormik,
     showPassword,
+    showErrorModal,
     handleShowPasswordChange,
   } = useLogin();
 
@@ -90,6 +91,11 @@ const SignIn = () => {
                 }}
               />
             </Box>
+            {showErrorModal && (
+              <Typography color="error" variant="body2">
+                Wrong email/username or password. Please try again...
+              </Typography>
+            )}
             <Box mb={3}>
               <Button
                 style={{
@@ -109,7 +115,13 @@ const SignIn = () => {
             </Box>
           </form>
           <Typography variant="h6">
-            <Typography variant="h6" color="secondary" sx={{ textDecoration: "none" }} component={Link} to="/forget-password">
+            <Typography
+              variant="h6"
+              color="secondary"
+              sx={{ textDecoration: "none" }}
+              component={Link}
+              to="/forgot-password"
+            >
               Forgot Your Password?
             </Typography>
           </Typography>

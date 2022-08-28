@@ -1,5 +1,5 @@
 import { useMemo, useReducer } from "react";
-import IUser from "src/ts/interfaces/user.interface";
+import IUser from "src/common/interfaces/user.interface";
 import UserContext from "./user-context";
 
 const defaultUserContextState: IUser = {

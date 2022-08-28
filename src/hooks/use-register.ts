@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import UserService from "../services/user.service";
 
 const useRegister = () => {
   const loginValidationSchema = Yup.object({
@@ -14,7 +15,7 @@ const useRegister = () => {
       [Yup.ref("password"), null],
       "Passwords must match"
     ),
-    agree: Yup.boolean().oneOf([true], 'Please accept Terms of Services!')
+    agree: Yup.bool().oneOf([true], "Please accept Terms of Services!"),
   });
 
   const registerFormik = useFormik({
@@ -25,8 +26,12 @@ const useRegister = () => {
       agree: false,
     },
     validationSchema: loginValidationSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const response = await UserService.signUp({
+        username: values.email.toString(),
+        password: values.password.toString(),
+      });
+      console.log(response);
     },
   });
 

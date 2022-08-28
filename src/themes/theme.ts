@@ -23,6 +23,14 @@ export const appTheme = responsiveFontSizes(
         fontSize: "56px",
         fontWeight: 700,
       },
+      h3: {
+        fontSize: "32px",
+        fontWeight: 600,
+      },
+      h4: {
+        fontSize: "24px",
+        fontWeight: 600,
+      },
       h5: {
         fontSize: "18px",
         fontWeight: 600,

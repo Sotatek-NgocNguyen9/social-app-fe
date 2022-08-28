@@ -1,5 +1,5 @@
 import React from "react";
-import IUser from "src/ts/interfaces/user.interface";
+import IUser from "src/common/interfaces/user.interface";
 
 const UserContext = React.createContext({
   userId: null,

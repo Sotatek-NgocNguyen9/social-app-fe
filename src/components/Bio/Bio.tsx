@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import UserContext from "../../contexts/user-context";
-import { Avatar, Box, CssBaseline, Divider, Grid, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material";
 import { appTheme } from "src/themes/theme";
 
 const Bio = () => {

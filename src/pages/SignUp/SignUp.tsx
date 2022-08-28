@@ -8,12 +8,17 @@ import {
   Box,
   FormControlLabel,
   Checkbox,
+  Modal,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import useRegister from "src/hooks/use-register";
+import { useState } from "react";
+import IUser from "../../common/interfaces/user.interface";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const {
     registerFormik,
     showPassword,
@@ -22,8 +27,73 @@ const SignUp = () => {
     handleShowConfirmChange,
   } = useRegister();
 
+  const [showAgreeError, setShowAgreeError] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (!registerFormik.values.agree) {
+      setShowAgreeError(true);
+    } else {
+      const response = await registerFormik.handleSubmit();
+      handleShowSuccessModal();
+      //Error checking
+    }
+  };
+
+  const handleShowSuccessModal = () => {
+    setShowSuccessModal(true);
+  };
+
+  const handleCloseSuccessModal = () => {
+    navigate("/sign-in");
+  };
+
+  const handleCloseButtonSuccessModal = () => {
+    navigate("/sign-in");
+  };
+
   return (
     <Box className={styles.main}>
+      <Modal open={showSuccessModal} onClose={handleCloseSuccessModal}>
+        <Box
+          sx={{
+            position: "absolute" as "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 800,
+            bgcolor: "background.paper",
+            borderRadius: 10,
+            p: 4,
+          }}
+        >
+          <Typography variant="h3">Success</Typography>
+          <Typography sx={{ mt: 2 }}>
+            You have signed up to Social App. Please check your email for
+            confirmation email.
+          </Typography>
+          <Typography sx={{ mt: 2 }}>
+            Closing this dialog will redirect you to sign in page!
+          </Typography>
+          <Button
+            style={{
+              marginTop: "20px",
+              borderRadius: "20px",
+              backgroundColor: "#C18FF5",
+              padding: "18px 36px",
+              fontSize: "18px",
+              float: "right",
+            }}
+            variant="contained"
+            color="primary"
+            type="submit"
+            onClick={handleCloseButtonSuccessModal}
+          >
+            Close
+          </Button>
+        </Box>
+      </Modal>
       <Box className={styles.flex}></Box>
       <Box className={styles.flex}>
         <Paper
@@ -37,12 +107,18 @@ const SignUp = () => {
           <Box mb={1}>
             <Typography color="#4D4D4D" variant="h6">
               Have an account?{" "}
-              <Typography variant="h6" color="secondary" sx={{textDecoration: "none"}} component={Link} to="/sign-in">
+              <Typography
+                variant="h6"
+                color="secondary"
+                sx={{ textDecoration: "none" }}
+                component={Link}
+                to="/sign-in"
+              >
                 Sign In
               </Typography>
             </Typography>
           </Box>
-          <form onSubmit={registerFormik.handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <Box mb={1}>
               <TextField
                 fullWidth
@@ -119,14 +195,31 @@ const SignUp = () => {
               />
             </Box>
             <FormControlLabel
-              control={<Checkbox color="secondary" />}
+              control={
+                <Checkbox
+                  id="agree"
+                  name="agree"
+                  checked={registerFormik.values.agree}
+                  onChange={registerFormik.handleChange}
+                  color="secondary"
+                />
+              }
               label={
                 <Box>
-                  <Typography variant="h6" display="inline">I accept the </Typography>
-                  <Typography variant="h6" color="secondary" display="inline">Terms & Conditions</Typography>
+                  <Typography variant="h6" display="inline">
+                    I accept the{" "}
+                  </Typography>
+                  <Typography variant="h6" color="secondary" display="inline">
+                    Terms & Conditions
+                  </Typography>
                 </Box>
               }
             ></FormControlLabel>
+            {showAgreeError && (
+              <Typography color="error" variant="body2">
+                {registerFormik.errors.agree}
+              </Typography>
+            )}
             <Box mb={3}>
               <Button
                 style={{

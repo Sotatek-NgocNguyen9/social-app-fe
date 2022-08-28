@@ -2,8 +2,10 @@ import { Navigate, Route, Routes as RRoutes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Home from "./pages/Home/Home";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
+import VerifyResetPassword from "./pages/VerifyResetPassword/VerifyResetPassword";
 
 const Routes = () => {
   return (
@@ -19,6 +21,8 @@ const Routes = () => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/auth/reset-password" element={<VerifyResetPassword />} />
         <Route path="*" element={<Navigate to="/sign-in" />} />
       </RRoutes>
   );

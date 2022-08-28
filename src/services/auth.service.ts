@@ -17,6 +17,10 @@ const forgotPassword = async (username: String) => {
   return await http.post("/auth/forgot-password", { username });
 }
 
-const AuthService = {signIn, generateNewAccessToken, logOut, forgotPassword};
+const confirmResetPassword = async (secretToken: String) => {
+  return await http.post("/auth/confirm-reset-password", { secretToken });
+}
+
+const AuthService = {signIn, generateNewAccessToken, logOut, forgotPassword, confirmResetPassword};
 
 export default AuthService;

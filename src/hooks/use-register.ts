@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { useContext } from "react";
 import { useState } from "react";
 import * as Yup from "yup";
 import UserService from "../services/user.service";
@@ -27,16 +28,27 @@ const useRegister = () => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values) => {
-      const response = await UserService.signUp({
-        username: values.email.toString(),
-        password: values.password.toString(),
-      });
-      console.log(response);
+      if (!registerFormik.values.agree) {
+        setShowAgreeError(true);
+      } else {
+        const response = await UserService.signUp({
+          username: values.email.toString(),
+          password: values.password.toString(),
+        });
+
+        console.log(response.status);
+
+        if (response.status === 201) {
+          setShowSuccessModal(true);
+        }
+      }
     },
   });
 
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirm, setShowConfirm] = useState(true);
+  const [showAgreeError, setShowAgreeError] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleShowPasswordChange = () => {
     setShowPassword(!showPassword);
@@ -50,6 +62,8 @@ const useRegister = () => {
     registerFormik,
     showPassword,
     showConfirm,
+    showAgreeError,
+    showSuccessModal,
     handleShowPasswordChange,
     handleShowConfirmChange,
   };

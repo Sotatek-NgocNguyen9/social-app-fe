@@ -2,18 +2,13 @@ import { Navigate } from "react-router-dom";
 import useAuth from "../../hooks/use-auth";
 
 const ProtectedRoute = (props: any) => {
-  const {token} = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  console.log(token);
-
-  if (!token) {
-    //or token not valid
-    return <Navigate to="/sign-in" />;
+  if (isAuthenticated) {
+    return props.children;
   }
 
-  // check token validity
-
-  return props.children;
+  return <Navigate to="/sign-in" />;
 };
 
 export default ProtectedRoute;

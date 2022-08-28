@@ -13,8 +13,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import useRegister from "src/hooks/use-register";
-import { useState } from "react";
-import IUser from "../../common/interfaces/user.interface";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -23,27 +21,11 @@ const SignUp = () => {
     registerFormik,
     showPassword,
     showConfirm,
+    showAgreeError,
+    showSuccessModal,
     handleShowPasswordChange,
     handleShowConfirmChange,
   } = useRegister();
-
-  const [showAgreeError, setShowAgreeError] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    if (!registerFormik.values.agree) {
-      setShowAgreeError(true);
-    } else {
-      const response = await registerFormik.handleSubmit();
-      handleShowSuccessModal();
-      //Error checking
-    }
-  };
-
-  const handleShowSuccessModal = () => {
-    setShowSuccessModal(true);
-  };
 
   const handleCloseSuccessModal = () => {
     navigate("/sign-in");
@@ -118,7 +100,7 @@ const SignUp = () => {
               </Typography>
             </Typography>
           </Box>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={registerFormik.handleSubmit}>
             <Box mb={1}>
               <TextField
                 fullWidth

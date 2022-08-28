@@ -1,26 +1,16 @@
-import { useCallback, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import useLocalStorage from "../hooks/use-local-storage";
+import { useCallback, useMemo, useState } from "react";
 import AuthContext from "./auth-context";
 
 const AuthContextProvider = (props: any) => {
-  const navigate = useNavigate();
+  const [isAuthenticated, setAuthenticated] = useState(false);
 
-  const [token, setToken] = useLocalStorage("token", null);
-
-  const login = useCallback(async (payload: String) => {
-    setToken(payload);
-    navigate("/");
-  }, [navigate, setToken]);
-
-  const logout = useCallback(() => {
-    setToken(null);
-    navigate("/sign-in", { replace: true });
-  }, [navigate, setToken]);
+  const setAuthenticatedState = useCallback((state: boolean) => {
+    setAuthenticated(state);
+  }, []);
 
   const authContext = useMemo(() => {
-    return { token, login, logout };
-  }, [token, login, logout]);
+    return { isAuthenticated, setAuthenticatedState };
+  }, [isAuthenticated, setAuthenticatedState]);
 
   return (
     <AuthContext.Provider value={authContext}>

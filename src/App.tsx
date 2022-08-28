@@ -5,20 +5,23 @@ import Home from "./pages/Home/Home";
 import SignIn from "./pages/SignIn/SignIn";
 import "./App.css";
 import SignUp from "./pages/SignUp/SignUp";
+import UserContextProvider from "./contexts/UserContextProvider";
 
 function App() {
   return (
-    <ThemeProvider theme={appTheme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="*" element={<Navigate to="/sign-in" />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <UserContextProvider>
+      <ThemeProvider theme={appTheme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="*" element={<Navigate to="/sign-in" />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </UserContextProvider>
   );
 }
 

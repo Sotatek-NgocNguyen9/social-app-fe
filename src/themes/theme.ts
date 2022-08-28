@@ -1,18 +1,19 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-// declare module "@mui/material/styles" {
-//   interface Theme {
-//     typography: {
-//       fontFamily: string
-//     }
-//   }
-//   // allow configuration using `createTheme`
-//   interface ThemeOptions {
-//     status?: {
-//       danger?: string;
-//     };
-//   }
-// }
+declare module "@mui/material/styles" {
+  interface Palette {
+    gray: {
+      background: string;
+      text: string;
+    };
+  }
+  interface PaletteOptions {
+    gray: {
+      background: string;
+      text: string;
+    };
+  }
+}
 
 export const appTheme = responsiveFontSizes(
   createTheme({
@@ -20,11 +21,23 @@ export const appTheme = responsiveFontSizes(
       fontFamily: ["Poppins"].join(","),
       h1: {
         fontSize: "56px",
+        fontWeight: 700,
+      },
+      h5: {
+        fontSize: "18px",
         fontWeight: 600,
       },
       h6: {
         fontSize: "16px",
         fontWeight: 500,
+      },
+      body1: {
+        fontSize: "16px",
+        fontWeight: 400,
+      },
+      body2: {
+        fontSize: "14px",
+        fontWeight: 300,
       },
     },
     palette: {
@@ -32,9 +45,13 @@ export const appTheme = responsiveFontSizes(
         main: "#C18FF5",
         contrastText: "#fff",
       },
+      gray: {
+        background: "#F6F6F6",
+        text: "#ACACAC",
+      },
       secondary: {
         main: "#5487F5",
-        contrastText: "#fff"
+        contrastText: "#fff",
       },
       background: {
         default: "#f6f6f6",

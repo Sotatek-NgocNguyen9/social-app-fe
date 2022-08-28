@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import Logo from "../../assets/logo.png";
+import { useContext } from "react";
+import UserContext from "../../contexts/user-context";
 import SearchBar from "../SearchBar/SearchBar";
 import { ReactComponent as HomeIcon } from "../../assets/svg/home.svg";
 import { ReactComponent as WatchIcon } from "../../assets/svg/watch.svg";
@@ -16,6 +18,8 @@ import { ReactComponent as MarketplaceIcon } from "../../assets/svg/marketplace.
 import { ReactComponent as GroupIcon } from "../../assets/svg/group.svg";
 
 const Header = () => {
+  const userContext = useContext(UserContext);
+
   return (
     <AppBar
       sx={{
@@ -64,7 +68,7 @@ const Header = () => {
           <Stack
             sx={{ textDecoration: "none" }}
             component={RouterLink}
-            to="/sign-in"
+            to="/"
             direction="row"
             alignItems="center"
             gap={1}
@@ -80,7 +84,7 @@ const Header = () => {
           <Stack
             sx={{ textDecoration: "none" }}
             component={RouterLink}
-            to="/sign-in"
+            to="/"
             direction="row"
             alignItems="center"
             gap={1}
@@ -96,7 +100,7 @@ const Header = () => {
           <Stack
             sx={{ textDecoration: "none" }}
             component={RouterLink}
-            to="/sign-in"
+            to="/"
             direction="row"
             alignItems="center"
             gap={1}
@@ -112,7 +116,7 @@ const Header = () => {
           <Stack
             sx={{ textDecoration: "none" }}
             component={RouterLink}
-            to="/sign-in"
+            to="/"
             direction="row"
             alignItems="center"
             gap={1}
@@ -120,7 +124,7 @@ const Header = () => {
           >
             <Avatar src="/src/assets/defaultAvatar.png"/>
             <Typography color="#000" variant="h6">
-              Nguyen Quynh Anh
+              {userContext.name}
             </Typography>
           </Stack>
         </Box>

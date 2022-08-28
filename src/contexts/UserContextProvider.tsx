@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useMemo, useReducer } from "react";
 import IUser from "src/ts/interfaces/user.interface";
 import UserContext from "./user-context";
 
@@ -17,10 +17,10 @@ const defaultUserContextState: IUser = {
 };
 
 const userContextReducer = (state: any, action: any) => {
-  if(action.type === "SET") {
+  if (action.type === "SET") {
     return action.user;
   }
-  if(action.type === "CLEAR") {
+  if (action.type === "CLEAR") {
     return defaultUserContextState;
   }
   return defaultUserContextState;
@@ -40,21 +40,23 @@ const UserContextProvider = (props: any) => {
     dispatchUserContextAction({ type: "CLEAR" });
   };
 
-  const userContext = {
-    userId: userContextState.userId,
-    username: userContextState.username,
-    name: userContextState.name,
-    email: userContextState.email,
-    profileImage: userContextState.profileImage,
-    bio: userContextState.bio,
-    location: userContextState.location,
-    facebook: userContextState.facebook,
-    instagram: userContextState.instagram,
-    linkedin: userContextState.linkedin,
-    isActivate: userContextState.isActivate,
-    setUser: setUserContextHandler,
-    clearUser: clearUserContextHandler,
-  };
+  const userContext = useMemo(() => {
+    return {
+      userId: userContextState.userId,
+      username: userContextState.username,
+      name: userContextState.name,
+      email: userContextState.email,
+      profileImage: userContextState.profileImage,
+      bio: userContextState.bio,
+      location: userContextState.location,
+      facebook: userContextState.facebook,
+      instagram: userContextState.instagram,
+      linkedin: userContextState.linkedin,
+      isActivate: userContextState.isActivate,
+      setUser: setUserContextHandler,
+      clearUser: clearUserContextHandler,
+    };
+  }, [userContextState]);
 
   return (
     <UserContext.Provider value={userContext}>

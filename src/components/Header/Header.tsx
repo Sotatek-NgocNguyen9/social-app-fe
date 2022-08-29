@@ -112,7 +112,8 @@ const Header = () => {
               <GroupIcon />
             </SvgIcon>
             <Typography color="#000" variant="h6">
-              Groups
+              {/* Groups */}
+              Feed
             </Typography>
           </Stack>
           <Stack

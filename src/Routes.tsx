@@ -6,6 +6,7 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import VerifyResetPassword from "./pages/VerifyResetPassword/VerifyResetPassword";
+import VerifySignUp from "./pages/VerifySignUp/VerifySignUp";
 
 const Routes = () => {
   return (
@@ -23,6 +24,7 @@ const Routes = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/auth/reset-password" element={<VerifyResetPassword />} />
+        <Route path="/auth/sign-up" element={<VerifySignUp />} />
         <Route path="*" element={<Navigate to="/sign-in" />} />
       </RRoutes>
   );

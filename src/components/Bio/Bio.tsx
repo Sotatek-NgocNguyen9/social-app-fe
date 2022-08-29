@@ -1,9 +1,22 @@
 import { useContext } from "react";
 import UserContext from "../../contexts/user-context";
-import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Paper,
+  Stack,
+  SvgIcon,
+  Typography,
+} from "@mui/material";
 import { appTheme } from "src/themes/theme";
+import { ReactComponent as FacebookIcon } from "../../assets/svg/facebook.svg";
+import { ReactComponent as InstagramIcon } from "../../assets/svg/instagram.svg";
+import { ReactComponent as LinkedInIcon } from "../../assets/svg/linkedin.svg";
 
-const Bio = () => {
+const Bio = (props: any) => {
   const userContext = useContext(UserContext);
 
   return (
@@ -14,7 +27,6 @@ const Bio = () => {
         padding: appTheme.spacing(3),
         textAlign: "center",
         borderRadius: 8,
-        height: "40vh",
         marginBottom: 2,
       }}
     >
@@ -65,6 +77,83 @@ const Bio = () => {
       <Typography align="left" variant="h6" color={appTheme.palette.gray.text}>
         MY PAGES
       </Typography>
+
+      {userContext.facebook != "" && (
+        <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+          <Stack
+            sx={{ textDecoration: "none", margin: 0 }}
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
+            gap={1}
+            ml={8}
+          >
+            <SvgIcon>
+              <FacebookIcon />
+            </SvgIcon>
+            <Typography align="left" color="#000" variant="body2">
+              {userContext.facebook}
+            </Typography>
+          </Stack>
+        </Box>
+      )}
+
+      {userContext.instagram != "" && (
+        <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+          <Stack
+            sx={{ textDecoration: "none", margin: 0 }}
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
+            gap={1}
+            ml={8}
+          >
+            <SvgIcon>
+              <InstagramIcon />
+            </SvgIcon>
+            <Typography align="left" color="#000" variant="body2">
+              {userContext.instagram}
+            </Typography>
+          </Stack>
+        </Box>
+      )}
+
+      {userContext.linkedin != "" && (
+        <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+          <Stack
+            sx={{ textDecoration: "none", margin: 0 }}
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
+            gap={1}
+            ml={8}
+          >
+            <SvgIcon>
+              <LinkedInIcon />
+            </SvgIcon>
+            <Typography align="left" color="#000" variant="body2">
+              {userContext.linkedin}
+            </Typography>
+          </Stack>
+        </Box>
+      )}
+
+      <Box>
+        <Button
+          style={{
+            border: "1px solid #C8C8C8",
+            borderRadius: "20px",
+            color: "#C8C8C8",
+            padding: "12px 24px",
+            fontSize: "18px",
+            width: "100%",
+          }}
+          color="primary"
+          onClick={() => {props.setShowBioModal(true)}}
+        >
+          Edit
+        </Button>
+      </Box>
     </Paper>
   );
 };

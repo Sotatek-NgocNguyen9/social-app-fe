@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import useAuth from "./use-auth";
 
 const useLogin = () => {
@@ -29,21 +30,31 @@ const useLogin = () => {
       AuthService.signIn({
         username: values.email,
         password: values.password,
-      }).then((response) => {
-        if (response.status === 201) {
-          setAuthenticatedState(true);
-          navigate("/");
-        }
-      }).catch((error) => {
-        if (error.response.status === 400) {
-          setShowErrorModal(true);
-        }
-      });
+      })
+        .then((response) => {
+          if (response.status === 201) {
+            setAuthenticatedState(true);
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 400 || error.response.status === 403) {
+            setShowErrorModal(true);
+          }
+          if (error.response.status === 401) {
+            UserService.resendConfirmEmail(values.email).then((response) => {
+              if (response.status === 201) {
+                setShowConfirmModal(true);
+              }
+            });
+          }
+        });
     },
   });
 
   const [showPassword, setShowPassword] = useState(true);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleShowPasswordChange = () => {
     setShowPassword(!showPassword);
@@ -53,6 +64,7 @@ const useLogin = () => {
     loginFormik,
     showPassword,
     showErrorModal,
+    showConfirmModal,
     handleShowPasswordChange,
   };
 };

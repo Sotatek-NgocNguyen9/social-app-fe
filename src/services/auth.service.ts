@@ -7,20 +7,31 @@ const signIn = async (payload: IAuth) => {
 
 const generateNewAccessToken = async () => {
   return await http.post("/auth/generate-access-token");
-}
+};
 
 const logOut = async () => {
   return await http.post("/auth/logout");
-}
+};
 
 const forgotPassword = async (username: String) => {
   return await http.post("/auth/forgot-password", { username });
-}
+};
 
 const confirmResetPassword = async (secretToken: String) => {
   return await http.post("/auth/confirm-reset-password", { secretToken });
-}
+};
 
-const AuthService = {signIn, generateNewAccessToken, logOut, forgotPassword, confirmResetPassword};
+const confirmEmail = async (secretToken: String) => {
+  return await http.post("/auth/confirm-email", { secretToken });
+};
+
+const AuthService = {
+  signIn,
+  generateNewAccessToken,
+  logOut,
+  forgotPassword,
+  confirmResetPassword,
+  confirmEmail,
+};
 
 export default AuthService;

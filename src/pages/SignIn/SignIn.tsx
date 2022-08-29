@@ -16,6 +16,7 @@ const SignIn = () => {
     loginFormik,
     showPassword,
     showErrorModal,
+    showConfirmModal,
     handleShowPasswordChange,
   } = useLogin();
 
@@ -91,6 +92,11 @@ const SignIn = () => {
                 }}
               />
             </Box>
+            {showConfirmModal && (
+              <Typography color="error" variant="body2">
+                A new verification email has been sent. Please check your inbox.
+              </Typography>
+            )}
             {showErrorModal && (
               <Typography color="error" variant="body2">
                 Wrong email/username or password. Please try again...

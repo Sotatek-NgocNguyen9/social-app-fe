@@ -3,12 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import Bio from "src/components/Bio/Bio";
 import Header from "src/components/Header/Header";
 import UserContext from "src/contexts/user-context";
+import BioModal from "../../components/BioModel/BioModal";
 import Birthday from "../../components/Birthday/Birthday";
 import FriendReq from "../../components/FriendReq/FriendReq";
-import AuthContext from "../../contexts/auth-context";
 
 const Home = () => {
-  const authContext = useContext(AuthContext);
   const userContext = useContext(UserContext);
 
   const [loading, setLoading] = useState(true);
@@ -16,20 +15,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUser = async () => {
       // await authContext.generateNewAccessToken();
-      await userContext.setUser({
-        userId: 1,
-        username: "nguyenquynhanh@gmail.com",
-        name: "Nguyen Quynh Anh",
-        email: "nguyenquynhanh@gmail.com",
-        profileImage:
-          "https://pickaface.net/gallery/avatar/unr_test_180316_0529_vkbto.png",
-        bio: "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', ",
-        location: "Hanoi, Vietnam",
-        facebook: "",
-        instagram: "quynh_anh700",
-        linkedin: "quynh_anh800",
-        isActivate: true,
-      });
+      await userContext.setUser();
     };
     setTimeout(() => {
       fetchUser().catch(console.error);
@@ -37,9 +23,16 @@ const Home = () => {
     }, 1000);
   }, []);
 
+  const [showBioModal, setShowBioModal] = useState(false);
+
+  const handleCloseBioModal = () => {
+    setShowBioModal(false);
+  }
+
   return (
     <Box position="fixed" width="100%">
       <Header />
+      <BioModal showBioModal={showBioModal} handleCloseBioModal={handleCloseBioModal}/>
       <Box flex={1} overflow="auto" mt={3} mx={12}>
         <Grid
           container
@@ -49,7 +42,7 @@ const Home = () => {
           }}
         >
           <Grid item xs>
-            <Bio />
+            <Bio setShowBioModal={setShowBioModal} />
           </Grid>
           <Grid
             item

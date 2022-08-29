@@ -6,7 +6,7 @@ const signIn = async (payload: IAuth) => {
 };
 
 const generateNewAccessToken = async () => {
-  return await http.post("/auth/generate-access-token");
+  return await http.get("/auth/generate-access-token");
 };
 
 const logOut = async () => {

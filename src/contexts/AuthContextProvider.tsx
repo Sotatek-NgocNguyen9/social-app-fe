@@ -17,11 +17,13 @@ const AuthContextProvider = (props: any) => {
   }, []);
 
   const generateNewAccessToken = useCallback(async () => {
-    const response = await AuthService.generateNewAccessToken();
-    if (response.status === 401) {
-      await setAuthenticatedState(false);
-      await navigate("/sign-in");
-    }
+    AuthService.generateNewAccessToken().catch((error) => {
+      console.log(error);
+      if (error.request.status === 401) {
+        setAuthenticatedState(false);
+        navigate("/sign-in");
+      }
+    });
   }, []);
 
   const logOut = useCallback(async () => {
@@ -31,7 +33,12 @@ const AuthContextProvider = (props: any) => {
   }, []);
 
   const authContext = useMemo(() => {
-    return { isAuthenticated, setAuthenticatedState, generateNewAccessToken, logOut };
+    return {
+      isAuthenticated,
+      setAuthenticatedState,
+      generateNewAccessToken,
+      logOut,
+    };
   }, [isAuthenticated, setAuthenticatedState, generateNewAccessToken, logOut]);
 
   return (

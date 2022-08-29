@@ -6,15 +6,17 @@ import UserContext from "src/contexts/user-context";
 import BioModal from "../../components/BioModel/BioModal";
 import Birthday from "../../components/Birthday/Birthday";
 import FriendReq from "../../components/FriendReq/FriendReq";
+import AuthContext from "../../contexts/auth-context";
 
 const Home = () => {
   const userContextFetcher = useContext(UserContext).setUser;
+  const authContext = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
-      // await authContext.generateNewAccessToken();
+      await authContext.generateNewAccessToken();
       await userContextFetcher();
     };
     setTimeout(() => {

@@ -1,10 +1,13 @@
 import { useCallback, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import IUser from 'src/common/interfaces/user.interface';
 import UserService from '../services/user.service';
 import UserContext from './user-context';
 import UserContextSetters from './user-context-setters';
 
 const UserContextProvider = (props: any) => {
+  const navigate = useNavigate();
+
   const defaultUserContextState: IUser = useMemo(() => {
     return {
       userId: 0,
@@ -24,9 +27,13 @@ const UserContextProvider = (props: any) => {
   const [userContextState, setUserContextState] = useState(defaultUserContextState);
 
   const setUserContextHandler = useCallback(() => {
-    UserService.getMe().then((response) => {
-      setUserContextState(response.data);
-    });
+    UserService.getMe()
+      .then((response) => {
+        setUserContextState(response.data);
+      })
+      .catch(() => {
+        navigate('/sign-in');
+      });
   }, []);
 
   const clearUserContextHandler = useCallback(() => {

@@ -9,14 +9,20 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { useContext } from 'react';
-import { API_URL } from '../../common/common.constants';
-import UserContext from '../../contexts/user-context';
 import { appTheme } from '../../themes/theme';
+import { API_URL } from '../../common/common.constants';
 import { ReactComponent as ImageIcon } from '../../assets/svg/image.svg';
+import useNewPostModal from '../../hooks/use-new-post-modal';
 
 const NewPostModal = (props: any) => {
-  const userContext = useContext(UserContext);
+  const {
+    postFormik,
+    userContext,
+    imageDataURL,
+    inputPictureRef,
+    handleShowPictureUpload,
+    handleUploadPicture
+  } = useNewPostModal();
 
   return (
     <Modal open={props.showNewPostModal} onClose={props.handleCloseNewPostModal}>
@@ -60,7 +66,15 @@ const NewPostModal = (props: any) => {
             </Typography>
           </Box>
         </Stack>
-        <form>
+        <form onSubmit={postFormik.handleSubmit}>
+          <input
+            type="file"
+            accept="image/*"
+            id="file"
+            ref={inputPictureRef}
+            style={{ display: 'none' }}
+            onChange={handleUploadPicture}
+          />
           <TextField
             sx={{
               '& fieldset': { border: 'none' },
@@ -69,14 +83,22 @@ const NewPostModal = (props: any) => {
             fullWidth
             placeholder="What's on your mind?"
             multiline
-            required></TextField>
+            required
+            id="content"
+            name="content"
+            value={postFormik.values.content}
+            onChange={postFormik.handleChange}
+            error={postFormik.touched.content && Boolean(postFormik.errors.content)}
+            helperText={postFormik.touched.content && postFormik.errors.content}></TextField>
+          <Stack alignItems="center" justifyContent="center">
+            <img style={{ borderRadius: '15px', width: '50%' }} src={imageDataURL} />
+          </Stack>
           <Grid
             container
             alignItems="center"
             mt={3}
             px={2}
             sx={{
-              marginTop: '100px',
               padding: '15px 20px 15px 20px',
               border: `1px solid ${appTheme.palette.gray.text}`,
               borderRadius: '10px'
@@ -87,7 +109,11 @@ const NewPostModal = (props: any) => {
             <Grid item xs>
               <Grid container direction="row-reverse">
                 <Grid item>
-                  <Stack direction="row" alignItems="center" spacing={1}>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    spacing={1}
+                    onClick={handleShowPictureUpload}>
                     <SvgIcon>
                       <ImageIcon />
                     </SvgIcon>

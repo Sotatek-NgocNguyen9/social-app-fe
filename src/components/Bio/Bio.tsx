@@ -125,6 +125,7 @@ const Bio = (props: any) => {
       <Box>
         <Button
           style={{
+            marginTop: '10px',
             border: '1px solid #C8C8C8',
             borderRadius: '20px',
             color: '#C8C8C8',

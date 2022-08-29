@@ -19,6 +19,8 @@ const Home = () => {
     handleCloseNewPostModal
   } = useHome();
 
+  console.log(loading);
+
   return (
     <Box position="fixed" width="100%">
       <Header />

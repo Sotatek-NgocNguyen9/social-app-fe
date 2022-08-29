@@ -13,7 +13,7 @@ const NewPost = (props: any) => {
 
   return (
     <Paper
-      onClick={() => props.setNewPostModal(true)}
+      onClick={() => props.setShowNewPostModal(true)}
       elevation={0}
       sx={{
         backgroundColor: appTheme.palette.mode === 'dark' ? '#1A2027' : '#fff',

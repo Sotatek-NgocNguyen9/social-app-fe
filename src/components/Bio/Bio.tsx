@@ -15,6 +15,7 @@ import { appTheme } from "src/themes/theme";
 import { ReactComponent as FacebookIcon } from "../../assets/svg/facebook.svg";
 import { ReactComponent as InstagramIcon } from "../../assets/svg/instagram.svg";
 import { ReactComponent as LinkedInIcon } from "../../assets/svg/linkedin.svg";
+import { API_URL } from "../../common/common.constants";
 
 const Bio = (props: any) => {
   const userContext = useContext(UserContext);
@@ -39,7 +40,7 @@ const Bio = (props: any) => {
       >
         <Grid item justifyContent="center">
           <Avatar
-            src={userContext.profileImage}
+            src={`${API_URL}/photo/profile-image/200x${userContext.profileImage}`}
             sx={{ width: 56, height: 56, marginBottom: 0.5 }}
             alt={userContext.name}
           />

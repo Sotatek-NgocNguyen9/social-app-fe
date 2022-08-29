@@ -12,8 +12,6 @@ const UserContext = React.createContext({
   instagram: "",
   linkedin: "",
   isActivate: false,
-  setUser: () => {},
-  clearUser: () => {},
 });
 
 export default UserContext;

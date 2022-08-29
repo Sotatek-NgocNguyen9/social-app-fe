@@ -17,11 +17,18 @@ const getMe = async () => {
   return await http.get("/user/me");
 }
 
+const updateProfilePic = async (file: any) => {
+  let formData = new FormData();
+  formData.append("profileImage", file);
+  return await http.put("/user/update-profile", formData);
+}
+
 const UserService = {
   signUp,
   resetPassword,
   resendConfirmEmail,
-  getMe
+  getMe,
+  updateProfilePic
 };
 
 export default UserService;

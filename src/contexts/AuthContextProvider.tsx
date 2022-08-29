@@ -20,8 +20,10 @@ const AuthContextProvider = (props: any) => {
     AuthService.generateNewAccessToken().catch((error) => {
       console.log(error);
       if (error.request.status === 401) {
-        setAuthenticatedState(false);
-        navigate("/sign-in");
+        AuthService.logOut().then(() => {
+          setAuthenticatedState(false);
+          navigate("/login");
+        });
       }
     });
   }, []);

@@ -7,9 +7,11 @@ import BioModal from "../../components/BioModel/BioModal";
 import Birthday from "../../components/Birthday/Birthday";
 import FriendReq from "../../components/FriendReq/FriendReq";
 import AuthContext from "../../contexts/auth-context";
+import UserContextSetters from "../../contexts/user-context-setters";
 
 const Home = () => {
-  const userContextFetcher = useContext(UserContext).setUser;
+  // const userContextFetcher = useContext(UserContext).setUser;
+  const userContextSetters = useContext(UserContextSetters);
   const authContext = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
@@ -17,13 +19,13 @@ const Home = () => {
   useEffect(() => {
     const fetchUser = async () => {
       await authContext.generateNewAccessToken();
-      await userContextFetcher();
+      await userContextSetters.setUser();
     };
     setTimeout(() => {
       fetchUser().catch(console.error);
       setLoading(false);
     }, 1000);
-  }, [userContextFetcher]);
+  }, [userContextSetters]);
 
   const [showBioModal, setShowBioModal] = useState(false);
 

@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Badge,
   Box,
   Divider,
   Grid,
@@ -8,15 +9,28 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import UserContext from "../../contexts/user-context";
 import { ReactComponent as EditIcon } from "../../assets/svg/edit.svg";
 import { ReactComponent as FacebookIcon } from "../../assets/svg/facebook.svg";
 import { ReactComponent as InstagramIcon } from "../../assets/svg/instagram.svg";
 import { ReactComponent as LinkedInIcon } from "../../assets/svg/linkedin.svg";
+import { ReactComponent as CameraIcon } from "../../assets/svg/camera.svg";
+import { API_URL } from "../../common/common.constants";
+import UserContextSetters from "../../contexts/user-context-setters";
 
 const BioModal = (props: any) => {
   const userContext = useContext(UserContext);
+  const userContextSetters = useContext(UserContextSetters);
+
+  const inputProfilePictureRef = useRef<HTMLInputElement>(null);
+  const handleShowProfilePicture = (e: any) => {
+    inputProfilePictureRef?.current?.click();
+  }
+  const handleUpdateProfilePicture = async (e: any) => {
+    const file = e.target.files[0];
+    await userContextSetters.updateProfilePic(file);
+  }
 
   return (
     <Modal open={props.showBioModal} onClose={props.handleCloseBioModal}>
@@ -39,16 +53,42 @@ const BioModal = (props: any) => {
         <Grid container alignItems="center" mt={3}>
           <Grid item>
             <Stack direction="row" alignItems="center">
-              <Avatar
-                src={userContext.profileImage}
-                sx={{
-                  width: 72,
-                  height: 72,
-                  marginBottom: 0.5,
-                  marginRight: 2,
-                }}
-                alt={userContext.name}
-              />
+              <Badge
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                badgeContent={
+                  <SvgIcon
+                    sx={{
+                      width: 56,
+                      align: "left",
+                      transform: "translate(-15px, -5px)",
+                    }}
+                    onClick={handleShowProfilePicture}
+                  >
+                    <CameraIcon />
+                  </SvgIcon>
+                }
+              >
+                <Avatar
+                  src={`${API_URL}/photo/profile-image/400x${userContext.profileImage}`}
+                  sx={{
+                    width: 72,
+                    height: 72,
+                    marginBottom: 0.5,
+                    marginRight: 2,
+                  }}
+                  alt={userContext.name}
+                />
+              </Badge>
+              <form>
+                <input
+                  type="file"
+                  id="file"
+                  ref={inputProfilePictureRef}
+                  style={{ display: "none" }}
+                  onChange={handleUpdateProfilePicture}
+                />
+              </form>
               <Typography align="right" variant="h4">
                 {userContext.name}
               </Typography>

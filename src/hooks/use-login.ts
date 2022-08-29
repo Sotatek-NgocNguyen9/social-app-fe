@@ -1,10 +1,10 @@
-import { useFormik } from "formik";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
-import AuthService from "../services/auth.service";
-import UserService from "../services/user.service";
-import useAuth from "./use-auth";
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import AuthService from '../services/auth.service';
+import UserService from '../services/user.service';
+import useAuth from './use-auth';
 
 const useLogin = () => {
   const setAuthenticatedState = useAuth().setAuthenticatedState;
@@ -12,29 +12,27 @@ const useLogin = () => {
   const navigate = useNavigate();
 
   const loginValidationSchema = Yup.object({
-    email: Yup.string()
-      .email("Enter your valid email")
-      .required("Email is required"),
+    email: Yup.string().email('Enter your valid email').required('Email is required'),
     password: Yup.string()
-      .min(8, "Password should be of minimum 8 characters length")
-      .required("Password is required"),
+      .min(8, 'Password should be of minimum 8 characters length')
+      .required('Password is required')
   });
 
   const loginFormik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: ''
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values) => {
       AuthService.signIn({
         username: values.email,
-        password: values.password,
+        password: values.password
       })
         .then((response) => {
           if (response.status === 201) {
             setAuthenticatedState(true);
-            navigate("/");
+            navigate('/');
           }
         })
         .catch((error) => {
@@ -49,7 +47,7 @@ const useLogin = () => {
             });
           }
         });
-    },
+    }
   });
 
   const [showPassword, setShowPassword] = useState(true);
@@ -65,7 +63,7 @@ const useLogin = () => {
     showPassword,
     showErrorModal,
     showConfirmModal,
-    handleShowPasswordChange,
+    handleShowPasswordChange
   };
 };
 

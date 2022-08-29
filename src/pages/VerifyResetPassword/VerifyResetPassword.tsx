@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import AuthService from "../../services/auth.service";
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import AuthService from '../../services/auth.service';
 
 const VerifyResetPassword = () => {
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("secretToken");
+  const token = searchParams.get('secretToken');
 
   useEffect(() => {
     if (token) {
       AuthService.confirmResetPassword(token).then((response) => {
         if (response.status === 201) {
-          navigate("/reset-password");
+          navigate('/reset-password');
         }
       });
     }

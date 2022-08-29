@@ -1,47 +1,30 @@
-import styles from "./SignIn.module.css";
-import {
-  Typography,
-  IconButton,
-  TextField,
-  Button,
-  Paper,
-  Box,
-} from "@mui/material";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import useLogin from "src/hooks/use-login";
-import { Link } from "react-router-dom";
+import styles from './SignIn.module.css';
+import { Typography, IconButton, TextField, Button, Paper, Box } from '@mui/material';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import useLogin from 'src/hooks/use-login';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
-  const {
-    loginFormik,
-    showPassword,
-    showErrorModal,
-    showConfirmModal,
-    handleShowPasswordChange,
-  } = useLogin();
+  const { loginFormik, showPassword, showErrorModal, showConfirmModal, handleShowPasswordChange } =
+    useLogin();
 
   return (
     <Box className={styles.main}>
       <Box className={styles.flex}></Box>
       <Box className={styles.flex}>
-        <Paper
-          elevation={1}
-          className={styles.login}
-          style={{ borderRadius: "30px" }}
-        >
+        <Paper elevation={1} className={styles.login} style={{ borderRadius: '30px' }}>
           <Box mb={2}>
             <Typography variant="h1">Sign In</Typography>
           </Box>
           <Box mb={1}>
             <Typography color="#4D4D4D" variant="h6">
-              Don't have an account?{" "}
+              Don't have an account?{' '}
               <Typography
                 variant="h6"
                 color="secondary"
-                sx={{ textDecoration: "none" }}
+                sx={{ textDecoration: 'none' }}
                 component={Link}
-                to="/sign-up"
-              >
+                to="/sign-up">
                 Sign Up
               </Typography>
             </Typography>
@@ -57,12 +40,8 @@ const SignIn = () => {
                 variant="outlined"
                 value={loginFormik.values.email}
                 onChange={loginFormik.handleChange}
-                error={
-                  loginFormik.touched.email && Boolean(loginFormik.errors.email)
-                }
-                helperText={
-                  loginFormik.touched.email && loginFormik.errors.email
-                }
+                error={loginFormik.touched.email && Boolean(loginFormik.errors.email)}
+                helperText={loginFormik.touched.email && loginFormik.errors.email}
               />
             </Box>
             <Box mb={1}>
@@ -73,22 +52,17 @@ const SignIn = () => {
                 name="password"
                 label="Password"
                 variant="outlined"
-                type={showPassword ? "password" : "text"}
+                type={showPassword ? 'password' : 'text'}
                 value={loginFormik.values.password}
                 onChange={loginFormik.handleChange}
-                error={
-                  loginFormik.touched.password &&
-                  Boolean(loginFormik.errors.password)
-                }
-                helperText={
-                  loginFormik.touched.password && loginFormik.errors.password
-                }
+                error={loginFormik.touched.password && Boolean(loginFormik.errors.password)}
+                helperText={loginFormik.touched.password && loginFormik.errors.password}
                 InputProps={{
                   endAdornment: (
                     <IconButton onClick={handleShowPasswordChange}>
                       <VisibilityOutlinedIcon />
                     </IconButton>
-                  ),
+                  )
                 }}
               />
             </Box>
@@ -105,17 +79,16 @@ const SignIn = () => {
             <Box mb={3}>
               <Button
                 style={{
-                  marginTop: "20px",
-                  borderRadius: "20px",
-                  backgroundColor: "#C18FF5",
-                  padding: "18px 36px",
-                  fontSize: "18px",
-                  width: "100%",
+                  marginTop: '20px',
+                  borderRadius: '20px',
+                  backgroundColor: '#C18FF5',
+                  padding: '18px 36px',
+                  fontSize: '18px',
+                  width: '100%'
                 }}
                 variant="contained"
                 color="primary"
-                type="submit"
-              >
+                type="submit">
                 Sign In
               </Button>
             </Box>
@@ -124,10 +97,9 @@ const SignIn = () => {
             <Typography
               variant="h6"
               color="secondary"
-              sx={{ textDecoration: "none" }}
+              sx={{ textDecoration: 'none' }}
               component={Link}
-              to="/forgot-password"
-            >
+              to="/forgot-password">
               Forgot Your Password?
             </Typography>
           </Typography>

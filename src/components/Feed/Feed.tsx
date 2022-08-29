@@ -1,5 +1,3 @@
-const Feed = () => {
-
-};
+const Feed = () => {};
 
 export default Feed;

@@ -1,5 +1,5 @@
-import AuthContextProvider from "./AuthContextProvider";
-import UserContextProvider from "./UserContextProvider";
+import AuthContextProvider from './AuthContextProvider';
+import UserContextProvider from './UserContextProvider';
 
 const ContextProvider = (props: any) => {
   return (

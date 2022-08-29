@@ -1,1 +1,1 @@
-export enum common {};
+export enum common {}

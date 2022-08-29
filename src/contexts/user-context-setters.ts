@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const UserContextSetters = React.createContext({
   setUser: () => {},
@@ -9,7 +9,7 @@ const UserContextSetters = React.createContext({
   updateBio: (bio: string) => {},
   updateFacebook: (facebook: string) => {},
   updateInstagram: (instagram: string) => {},
-  updateLinkedin: (linkedin: string) => {},
+  updateLinkedin: (linkedin: string) => {}
 });
 
 export default UserContextSetters;

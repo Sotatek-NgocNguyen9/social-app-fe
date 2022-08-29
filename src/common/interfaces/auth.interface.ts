@@ -1,6 +1,6 @@
 interface IAuth {
-  username: String;
-  password: String;
+  username: string;
+  password: string;
 }
 
 export default IAuth;

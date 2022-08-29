@@ -1,29 +1,24 @@
-import { useFormik } from "formik";
-import { useState } from "react";
-import * as Yup from "yup";
-import UserService from "../services/user.service";
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import * as Yup from 'yup';
+import UserService from '../services/user.service';
 
 const useRegister = () => {
   const loginValidationSchema = Yup.object({
-    email: Yup.string()
-      .email("Enter your valid email")
-      .required("Email is required"),
+    email: Yup.string().email('Enter your valid email').required('Email is required'),
     password: Yup.string()
-      .min(8, "Password should be of minimum 8 characters length")
-      .required("Password is required"),
-    confirm: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Passwords must match"
-    ),
-    agree: Yup.bool().oneOf([true], "Please accept Terms of Services!"),
+      .min(8, 'Password should be of minimum 8 characters length')
+      .required('Password is required'),
+    confirm: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    agree: Yup.bool().oneOf([true], 'Please accept Terms of Services!')
   });
 
   const registerFormik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      confirm: "",
-      agree: false,
+      email: '',
+      password: '',
+      confirm: '',
+      agree: false
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values) => {
@@ -32,7 +27,7 @@ const useRegister = () => {
       } else {
         const response = await UserService.signUp({
           username: values.email.toString(),
-          password: values.password.toString(),
+          password: values.password.toString()
         });
 
         console.log(response.status);
@@ -41,7 +36,7 @@ const useRegister = () => {
           setShowSuccessModal(true);
         }
       }
-    },
+    }
   });
 
   const [showPassword, setShowPassword] = useState(true);
@@ -64,7 +59,7 @@ const useRegister = () => {
     showAgreeError,
     showSuccessModal,
     handleShowPasswordChange,
-    handleShowConfirmChange,
+    handleShowConfirmChange
   };
 };
 

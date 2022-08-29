@@ -9,18 +9,18 @@ import {
   Stack,
   SvgIcon,
   TextField,
-  Typography,
-} from "@mui/material";
-import { useContext, useRef, useState } from "react";
-import UserContext from "../../contexts/user-context";
-import { ReactComponent as EditIcon } from "../../assets/svg/edit.svg";
-import { ReactComponent as FacebookIcon } from "../../assets/svg/facebook.svg";
-import { ReactComponent as InstagramIcon } from "../../assets/svg/instagram.svg";
-import { ReactComponent as LinkedInIcon } from "../../assets/svg/linkedin.svg";
-import { ReactComponent as CameraIcon } from "../../assets/svg/camera.svg";
-import { API_URL } from "../../common/common.constants";
-import UserContextSetters from "../../contexts/user-context-setters";
-import useBioModal from "../../hooks/use-bio-modal";
+  Typography
+} from '@mui/material';
+import { useContext, useRef } from 'react';
+import UserContext from '../../contexts/user-context';
+import { ReactComponent as EditIcon } from '../../assets/svg/edit.svg';
+import { ReactComponent as FacebookIcon } from '../../assets/svg/facebook.svg';
+import { ReactComponent as InstagramIcon } from '../../assets/svg/instagram.svg';
+import { ReactComponent as LinkedInIcon } from '../../assets/svg/linkedin.svg';
+import { ReactComponent as CameraIcon } from '../../assets/svg/camera.svg';
+import { API_URL } from '../../common/common.constants';
+import UserContextSetters from '../../contexts/user-context-setters';
+import useBioModal from '../../hooks/use-bio-modal';
 
 const BioModal = (props: any) => {
   const userContext = useContext(UserContext);
@@ -53,23 +53,22 @@ const BioModal = (props: any) => {
     setEditBio,
     setEditFacebook,
     setEditInstagram,
-    setEditLinkedin,
+    setEditLinkedin
   } = useBioModal();
 
   return (
     <Modal open={props.showBioModal} onClose={props.handleCloseBioModal}>
       <Box
         sx={{
-          position: "absolute" as "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
+          position: 'absolute' as const,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
           width: 800,
-          bgcolor: "background.paper",
+          bgcolor: 'background.paper',
           borderRadius: 5,
-          p: 4,
-        }}
-      >
+          p: 4
+        }}>
         <Typography variant="h3" align="center">
           Edit Profile
         </Typography>
@@ -79,26 +78,24 @@ const BioModal = (props: any) => {
             <Stack direction="row" alignItems="center">
               <Badge
                 overlap="circular"
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                 badgeContent={
                   <SvgIcon
                     sx={{
                       width: 56,
-                      align: "left",
-                      transform: "translate(-15px, -5px)",
+                      align: 'left',
+                      transform: 'translate(-15px, -5px)'
                     }}
-                    onClick={handleShowProfilePicture}
-                  >
+                    onClick={handleShowProfilePicture}>
                     <CameraIcon />
                   </SvgIcon>
-                }
-              >
+                }>
                 <form>
                   <input
                     type="file"
                     id="file"
                     ref={inputProfilePictureRef}
-                    style={{ display: "none" }}
+                    style={{ display: 'none' }}
                     onChange={handleUpdateProfilePicture}
                   />
                 </form>
@@ -109,7 +106,7 @@ const BioModal = (props: any) => {
                     width: 72,
                     height: 72,
                     marginBottom: 0.5,
-                    marginRight: 2,
+                    marginRight: 2
                   }}
                   alt={userContext.name}
                 />
@@ -126,26 +123,20 @@ const BioModal = (props: any) => {
                       variant="outlined"
                       value={nameFormik.values.name}
                       onChange={nameFormik.handleChange}
-                      error={
-                        nameFormik.touched.name &&
-                        Boolean(nameFormik.errors.name)
-                      }
-                      helperText={
-                        nameFormik.touched.name && nameFormik.errors.name
-                      }
+                      error={nameFormik.touched.name && Boolean(nameFormik.errors.name)}
+                      helperText={nameFormik.touched.name && nameFormik.errors.name}
                     />
                     <Button
                       style={{
-                        borderRadius: "20px",
-                        backgroundColor: "#C18FF5",
-                        padding: "9px 18px 9px 18px",
-                        fontSize: "18px",
-                        marginTop: "5px",
+                        borderRadius: '20px',
+                        backgroundColor: '#C18FF5',
+                        padding: '9px 18px 9px 18px',
+                        fontSize: '18px',
+                        marginTop: '5px'
                       }}
                       variant="contained"
                       color="primary"
-                      type="submit"
-                    >
+                      type="submit">
                       Update
                     </Button>
                   </Stack>
@@ -188,33 +179,28 @@ const BioModal = (props: any) => {
                     value={locationFormik.values.location}
                     onChange={locationFormik.handleChange}
                     error={
-                      locationFormik.touched.location &&
-                      Boolean(locationFormik.errors.location)
+                      locationFormik.touched.location && Boolean(locationFormik.errors.location)
                     }
-                    helperText={
-                      locationFormik.touched.location &&
-                      locationFormik.errors.location
-                    }
+                    helperText={locationFormik.touched.location && locationFormik.errors.location}
                   />
                   <Button
                     style={{
-                      borderRadius: "20px",
-                      backgroundColor: "#C18FF5",
-                      padding: "9px 18px 9px 18px",
-                      fontSize: "18px",
-                      marginTop: "5px",
+                      borderRadius: '20px',
+                      backgroundColor: '#C18FF5',
+                      padding: '9px 18px 9px 18px',
+                      fontSize: '18px',
+                      marginTop: '5px'
                     }}
                     variant="contained"
                     color="primary"
-                    type="submit"
-                  >
+                    type="submit">
                     Update
                   </Button>
                 </Stack>
               </form>
             ) : (
               <Typography variant="body1" align="left" mt={1}>
-                {userContext.location ? userContext.location : "Not Available"}
+                {userContext.location ? userContext.location : 'Not Available'}
               </Typography>
             )}
           </Grid>
@@ -232,11 +218,7 @@ const BioModal = (props: any) => {
         </Grid>
 
         <Box my={4}>
-          <Divider
-            variant="inset"
-            component="li"
-            sx={{ listStyleType: "none", margin: "0%" }}
-          />
+          <Divider variant="inset" component="li" sx={{ listStyleType: 'none', margin: '0%' }} />
         </Box>
 
         <Grid container alignItems="center">
@@ -246,12 +228,7 @@ const BioModal = (props: any) => {
             </Typography>
             {editBio ? (
               <form onSubmit={bioFormik.handleSubmit}>
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  spacing={2}
-                  sx={{ width: "100%" }}
-                >
+                <Stack direction="row" alignItems="center" spacing={2} sx={{ width: '100%' }}>
                   <TextField
                     fullWidth
                     multiline
@@ -262,30 +239,27 @@ const BioModal = (props: any) => {
                     variant="outlined"
                     value={bioFormik.values.bio}
                     onChange={bioFormik.handleChange}
-                    error={
-                      bioFormik.touched.bio && Boolean(bioFormik.errors.bio)
-                    }
+                    error={bioFormik.touched.bio && Boolean(bioFormik.errors.bio)}
                     helperText={bioFormik.touched.bio && bioFormik.errors.bio}
                   />
                   <Button
                     style={{
-                      borderRadius: "20px",
-                      backgroundColor: "#C18FF5",
-                      padding: "9px 18px 9px 18px",
-                      fontSize: "18px",
-                      marginTop: "5px",
+                      borderRadius: '20px',
+                      backgroundColor: '#C18FF5',
+                      padding: '9px 18px 9px 18px',
+                      fontSize: '18px',
+                      marginTop: '5px'
                     }}
                     variant="contained"
                     color="primary"
-                    type="submit"
-                  >
+                    type="submit">
                     Update
                   </Button>
                 </Stack>
               </form>
             ) : (
               <Typography variant="body1" align="left" mt={1}>
-                {userContext.bio ? userContext.bio : "Not Available"}
+                {userContext.bio ? userContext.bio : 'Not Available'}
               </Typography>
             )}
           </Grid>
@@ -296,8 +270,7 @@ const BioModal = (props: any) => {
                   <SvgIcon
                     onClick={() => {
                       setEditBio(!editBio);
-                    }}
-                  >
+                    }}>
                     <EditIcon />
                   </SvgIcon>
                 </Stack>
@@ -307,11 +280,7 @@ const BioModal = (props: any) => {
         </Grid>
 
         <Box my={4}>
-          <Divider
-            variant="inset"
-            component="li"
-            sx={{ listStyleType: "none", margin: "0%" }}
-          />
+          <Divider variant="inset" component="li" sx={{ listStyleType: 'none', margin: '0%' }} />
         </Box>
 
         <Typography variant="h4" align="left" mb={2}>
@@ -319,26 +288,20 @@ const BioModal = (props: any) => {
         </Typography>
         <Grid container alignItems="center">
           <Grid item>
-            <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+            <Box my={1} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
               <Stack
-                sx={{ textDecoration: "none", margin: 0 }}
+                sx={{ textDecoration: 'none', margin: 0 }}
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="center"
                 gap={1}
-                ml={8}
-              >
+                ml={8}>
                 <SvgIcon>
                   <FacebookIcon />
                 </SvgIcon>
                 {editFacebook ? (
                   <form onSubmit={facebookFormik.handleSubmit}>
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      spacing={2}
-                      sx={{ width: "100%" }}
-                    >
+                    <Stack direction="row" alignItems="center" spacing={2} sx={{ width: '100%' }}>
                       <TextField
                         fullWidth
                         margin="normal"
@@ -349,35 +312,30 @@ const BioModal = (props: any) => {
                         value={facebookFormik.values.facebook}
                         onChange={facebookFormik.handleChange}
                         error={
-                          facebookFormik.touched.facebook &&
-                          Boolean(facebookFormik.errors.facebook)
+                          facebookFormik.touched.facebook && Boolean(facebookFormik.errors.facebook)
                         }
                         helperText={
-                          facebookFormik.touched.facebook &&
-                          facebookFormik.errors.facebook
+                          facebookFormik.touched.facebook && facebookFormik.errors.facebook
                         }
                       />
                       <Button
                         style={{
-                          borderRadius: "20px",
-                          backgroundColor: "#C18FF5",
-                          padding: "9px 18px 9px 18px",
-                          fontSize: "18px",
-                          marginTop: "5px",
+                          borderRadius: '20px',
+                          backgroundColor: '#C18FF5',
+                          padding: '9px 18px 9px 18px',
+                          fontSize: '18px',
+                          marginTop: '5px'
                         }}
                         variant="contained"
                         color="primary"
-                        type="submit"
-                      >
+                        type="submit">
                         Update
                       </Button>
                     </Stack>
                   </form>
                 ) : (
                   <Typography align="left" color="#000" variant="body2">
-                    {userContext.facebook
-                      ? userContext.facebook
-                      : "Not Available"}
+                    {userContext.facebook ? userContext.facebook : 'Not Available'}
                   </Typography>
                 )}
               </Stack>
@@ -390,8 +348,7 @@ const BioModal = (props: any) => {
                   <SvgIcon
                     onClick={() => {
                       setEditFacebook(!editFacebook);
-                    }}
-                  >
+                    }}>
                     <EditIcon />
                   </SvgIcon>
                 </Stack>
@@ -401,26 +358,20 @@ const BioModal = (props: any) => {
         </Grid>
         <Grid container alignItems="center">
           <Grid item>
-            <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+            <Box my={1} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
               <Stack
-                sx={{ textDecoration: "none", margin: 0 }}
+                sx={{ textDecoration: 'none', margin: 0 }}
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="center"
                 gap={1}
-                ml={8}
-              >
+                ml={8}>
                 <SvgIcon>
                   <InstagramIcon />
                 </SvgIcon>
                 {editInstagram ? (
                   <form onSubmit={instagramFormik.handleSubmit}>
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      spacing={2}
-                      sx={{ width: "100%" }}
-                    >
+                    <Stack direction="row" alignItems="center" spacing={2} sx={{ width: '100%' }}>
                       <TextField
                         fullWidth
                         margin="normal"
@@ -435,31 +386,27 @@ const BioModal = (props: any) => {
                           Boolean(instagramFormik.errors.instagram)
                         }
                         helperText={
-                          instagramFormik.touched.instagram &&
-                          instagramFormik.errors.instagram
+                          instagramFormik.touched.instagram && instagramFormik.errors.instagram
                         }
                       />
                       <Button
                         style={{
-                          borderRadius: "20px",
-                          backgroundColor: "#C18FF5",
-                          padding: "9px 18px 9px 18px",
-                          fontSize: "18px",
-                          marginTop: "5px",
+                          borderRadius: '20px',
+                          backgroundColor: '#C18FF5',
+                          padding: '9px 18px 9px 18px',
+                          fontSize: '18px',
+                          marginTop: '5px'
                         }}
                         variant="contained"
                         color="primary"
-                        type="submit"
-                      >
+                        type="submit">
                         Update
                       </Button>
                     </Stack>
                   </form>
                 ) : (
                   <Typography align="left" color="#000" variant="body2">
-                    {userContext.instagram
-                      ? userContext.instagram
-                      : "Not Available"}
+                    {userContext.instagram ? userContext.instagram : 'Not Available'}
                   </Typography>
                 )}
               </Stack>
@@ -472,8 +419,7 @@ const BioModal = (props: any) => {
                   <SvgIcon
                     onClick={() => {
                       setEditInstagram(!editInstagram);
-                    }}
-                  >
+                    }}>
                     <EditIcon />
                   </SvgIcon>
                 </Stack>
@@ -483,26 +429,20 @@ const BioModal = (props: any) => {
         </Grid>
         <Grid container alignItems="center">
           <Grid item>
-            <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+            <Box my={1} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
               <Stack
-                sx={{ textDecoration: "none", margin: 0 }}
+                sx={{ textDecoration: 'none', margin: 0 }}
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="center"
                 gap={1}
-                ml={8}
-              >
+                ml={8}>
                 <SvgIcon>
                   <LinkedInIcon />
                 </SvgIcon>
                 {editLinkedin ? (
                   <form onSubmit={linkedinFormik.handleSubmit}>
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      spacing={2}
-                      sx={{ width: "100%" }}
-                    >
+                    <Stack direction="row" alignItems="center" spacing={2} sx={{ width: '100%' }}>
                       <TextField
                         fullWidth
                         margin="normal"
@@ -513,35 +453,30 @@ const BioModal = (props: any) => {
                         value={linkedinFormik.values.linkedin}
                         onChange={linkedinFormik.handleChange}
                         error={
-                          linkedinFormik.touched.linkedin &&
-                          Boolean(linkedinFormik.errors.linkedin)
+                          linkedinFormik.touched.linkedin && Boolean(linkedinFormik.errors.linkedin)
                         }
                         helperText={
-                          linkedinFormik.touched.linkedin &&
-                          linkedinFormik.errors.linkedin
+                          linkedinFormik.touched.linkedin && linkedinFormik.errors.linkedin
                         }
                       />
                       <Button
                         style={{
-                          borderRadius: "20px",
-                          backgroundColor: "#C18FF5",
-                          padding: "9px 18px 9px 18px",
-                          fontSize: "18px",
-                          marginTop: "5px",
+                          borderRadius: '20px',
+                          backgroundColor: '#C18FF5',
+                          padding: '9px 18px 9px 18px',
+                          fontSize: '18px',
+                          marginTop: '5px'
                         }}
                         variant="contained"
                         color="primary"
-                        type="submit"
-                      >
+                        type="submit">
                         Update
                       </Button>
                     </Stack>
                   </form>
                 ) : (
                   <Typography align="left" color="#000" variant="body2">
-                    {userContext.linkedin
-                      ? userContext.linkedin
-                      : "Not Available"}
+                    {userContext.linkedin ? userContext.linkedin : 'Not Available'}
                   </Typography>
                 )}
               </Stack>
@@ -554,8 +489,7 @@ const BioModal = (props: any) => {
                   <SvgIcon
                     onClick={() => {
                       setEditLinkedin(!editLinkedin);
-                    }}
-                  >
+                    }}>
                     <EditIcon />
                   </SvgIcon>
                 </Stack>

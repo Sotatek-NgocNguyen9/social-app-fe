@@ -1,23 +1,20 @@
-import { useFormik } from "formik";
-import { useState } from "react";
-import * as Yup from "yup";
-import UserService from "../services/user.service";
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import * as Yup from 'yup';
+import UserService from '../services/user.service';
 
 const useResetPassword = () => {
   const resetPasswordValidationSchema = Yup.object({
     password: Yup.string()
-      .min(8, "Password should be of minimum 8 characters length")
-      .required("Password is required"),
-    confirm: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Passwords must match"
-    ),
+      .min(8, 'Password should be of minimum 8 characters length')
+      .required('Password is required'),
+    confirm: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match')
   });
 
   const resetPasswordFormik = useFormik({
     initialValues: {
-      password: "",
-      confirm: "",
+      password: '',
+      confirm: ''
     },
     validationSchema: resetPasswordValidationSchema,
     onSubmit: async (values) => {
@@ -26,7 +23,7 @@ const useResetPassword = () => {
           setShowSuccessModal(true);
         }
       });
-    },
+    }
   });
 
   const [showPassword, setShowPassword] = useState(true);
@@ -47,7 +44,7 @@ const useResetPassword = () => {
     showConfirm,
     showSuccessModal,
     handleShowPasswordChange,
-    handleShowConfirmChange,
+    handleShowConfirmChange
   };
 };
 

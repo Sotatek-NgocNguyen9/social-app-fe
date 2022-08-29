@@ -1,28 +1,28 @@
-import http from "../common/http-common";
-import IAuth from "../common/interfaces/auth.interface";
+import http from '../common/http-common';
+import IAuth from '../common/interfaces/auth.interface';
 
 const signIn = async (payload: IAuth) => {
-  return await http.post("/auth/login", payload);
+  return await http.post('/auth/login', payload);
 };
 
 const generateNewAccessToken = async () => {
-  return await http.get("/auth/generate-access-token");
+  return await http.get('/auth/generate-access-token');
 };
 
 const logOut = async () => {
-  return await http.post("/auth/logout");
+  return await http.post('/auth/logout');
 };
 
-const forgotPassword = async (username: String) => {
-  return await http.post("/auth/forgot-password", { username });
+const forgotPassword = async (username: string) => {
+  return await http.post('/auth/forgot-password', { username });
 };
 
-const confirmResetPassword = async (secretToken: String) => {
-  return await http.post("/auth/confirm-reset-password", { secretToken });
+const confirmResetPassword = async (secretToken: string) => {
+  return await http.post('/auth/confirm-reset-password', { secretToken });
 };
 
-const confirmEmail = async (secretToken: String) => {
-  return await http.post("/auth/confirm-email", { secretToken });
+const confirmEmail = async (secretToken: string) => {
+  return await http.post('/auth/confirm-email', { secretToken });
 };
 
 const AuthService = {
@@ -31,7 +31,7 @@ const AuthService = {
   logOut,
   forgotPassword,
   confirmResetPassword,
-  confirmEmail,
+  confirmEmail
 };
 
 export default AuthService;

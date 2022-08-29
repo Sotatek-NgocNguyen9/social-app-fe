@@ -5,6 +5,7 @@ import Header from "src/components/Header/Header";
 import BioModal from "../../components/BioModel/BioModal";
 import Birthday from "../../components/Birthday/Birthday";
 import FriendReq from "../../components/FriendReq/FriendReq";
+import NewPost from "../../components/NewPost/NewPost";
 import UserContextSetters from "../../contexts/user-context-setters";
 // import AuthContext from "../../contexts/auth-context";
 
@@ -51,7 +52,9 @@ const Home = () => {
             item
             xs={7}
             style={{ maxHeight: "100vh", overflow: "auto" }}
-          ></Grid>
+          >
+            <NewPost />
+          </Grid>
           <Grid item xs>
             <FriendReq />
             <Birthday />

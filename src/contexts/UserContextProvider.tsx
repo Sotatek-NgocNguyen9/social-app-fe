@@ -1,4 +1,4 @@
-import { useMemo, useReducer } from "react";
+import { useCallback, useMemo, useReducer } from "react";
 import IUser from "src/common/interfaces/user.interface";
 import UserService from "../services/user.service";
 import UserContext from "./user-context";
@@ -33,15 +33,15 @@ const UserContextProvider = (props: any) => {
     defaultUserContextState
   );
 
-  const setUserContextHandler = () => {
-    const user = UserService.getMe().then((response) => {
+  const setUserContextHandler = useCallback(() => {
+    UserService.getMe().then((response) => {
       dispatchUserContextAction({ type: "SET", user: response.data });
     });    
-  };
+  }, []);
 
-  const clearUserContextHandler = () => {
+  const clearUserContextHandler = useCallback(() => {
     dispatchUserContextAction({ type: "CLEAR" });
-  };
+  }, []);
 
   const userContext = useMemo(() => {
     return {
@@ -59,7 +59,7 @@ const UserContextProvider = (props: any) => {
       setUser: setUserContextHandler,
       clearUser: clearUserContextHandler,
     };
-  }, [userContextState]);
+  }, [userContextState, setUserContextHandler, clearUserContextHandler]);
 
   return (
     <UserContext.Provider value={userContext}>

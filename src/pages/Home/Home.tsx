@@ -8,20 +8,20 @@ import Birthday from "../../components/Birthday/Birthday";
 import FriendReq from "../../components/FriendReq/FriendReq";
 
 const Home = () => {
-  const userContext = useContext(UserContext);
+  const userContextFetcher = useContext(UserContext).setUser;
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       // await authContext.generateNewAccessToken();
-      await userContext.setUser();
+      await userContextFetcher();
     };
     setTimeout(() => {
       fetchUser().catch(console.error);
       setLoading(false);
     }, 1000);
-  }, []);
+  }, [userContextFetcher]);
 
   const [showBioModal, setShowBioModal] = useState(false);
 

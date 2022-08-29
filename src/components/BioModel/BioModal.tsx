@@ -1,7 +1,7 @@
 import {
   Avatar,
   Box,
-  Button,
+  Divider,
   Grid,
   Modal,
   Stack,
@@ -10,8 +10,10 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import UserContext from "../../contexts/user-context";
-import { appTheme } from "../../themes/theme";
 import { ReactComponent as EditIcon } from "../../assets/svg/edit.svg";
+import { ReactComponent as FacebookIcon } from "../../assets/svg/facebook.svg";
+import { ReactComponent as InstagramIcon } from "../../assets/svg/instagram.svg";
+import { ReactComponent as LinkedInIcon } from "../../assets/svg/linkedin.svg";
 
 const BioModal = (props: any) => {
   const userContext = useContext(UserContext);
@@ -33,38 +35,203 @@ const BioModal = (props: any) => {
         <Typography variant="h3" align="center">
           Edit Profile
         </Typography>
-        <Grid
-          container
-          justifyContent="flex-start"
-          direction="row"
-          alignItems="center"
-          spacing={1.5}
-        >
-          <Grid item justifyContent="center">
-            <Avatar
-              src={userContext.profileImage}
-              sx={{ width: 56, height: 56, marginBottom: 0.5 }}
-              alt={userContext.name}
-            />
-          </Grid>
+
+        <Grid container alignItems="center" mt={3}>
           <Grid item>
-            <Stack>
-              <Typography align="left" variant="h5">
+            <Stack direction="row" alignItems="center">
+              <Avatar
+                src={userContext.profileImage}
+                sx={{
+                  width: 72,
+                  height: 72,
+                  marginBottom: 0.5,
+                  marginRight: 2,
+                }}
+                alt={userContext.name}
+              />
+              <Typography align="right" variant="h4">
                 {userContext.name}
               </Typography>
-              <SvgIcon>
-                <EditIcon />
-              </SvgIcon>
             </Stack>
           </Grid>
+          <Grid item xs>
+            <Grid container direction="row-reverse">
+              <Grid item>
+                <Stack direction="row" alignItems="center">
+                  <SvgIcon>
+                    <EditIcon />
+                  </SvgIcon>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
-        <Typography sx={{ mt: 2 }}>
-          You have signed up to Social App. Please check your email for
-          confirmation email.
+
+        <Grid container alignItems="center">
+          <Grid item>
+            <Typography variant="h4" align="left" mt={3}>
+              Location
+            </Typography>
+            <Typography variant="body1" align="left" mt={1}>
+              {userContext.location}
+            </Typography>
+          </Grid>
+          <Grid item xs>
+            <Grid container direction="row-reverse">
+              <Grid item>
+                <Stack direction="row" alignItems="center">
+                  <SvgIcon>
+                    <EditIcon />
+                  </SvgIcon>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Box my={4}>
+          <Divider
+            variant="inset"
+            component="li"
+            sx={{ listStyleType: "none", margin: "0%" }}
+          />
+        </Box>
+
+        <Grid container alignItems="center">
+          <Grid item>
+            <Typography variant="h4" align="left">
+              Bio
+            </Typography>
+            <Typography variant="body1" align="left" mt={1}>
+              {userContext.bio ? userContext.bio : "Not Available"}
+            </Typography>
+          </Grid>
+          <Grid item xs>
+            <Grid container direction="row-reverse">
+              <Grid item>
+                <Stack direction="row" alignItems="center">
+                  <SvgIcon>
+                    <EditIcon />
+                  </SvgIcon>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Box my={4}>
+          <Divider
+            variant="inset"
+            component="li"
+            sx={{ listStyleType: "none", margin: "0%" }}
+          />
+        </Box>
+
+        <Typography variant="h4" align="left" mb={2}>
+          My pages
         </Typography>
-        <Typography sx={{ mt: 2 }}>
-          Closing this dialog will redirect you to sign in page!
-        </Typography>
+        <Grid container alignItems="center">
+          <Grid item>
+            <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+              <Stack
+                sx={{ textDecoration: "none", margin: 0 }}
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                gap={1}
+                ml={8}
+              >
+                <SvgIcon>
+                  <FacebookIcon />
+                </SvgIcon>
+                <Typography align="left" color="#000" variant="body2">
+                  {userContext.facebook
+                    ? userContext.facebook
+                    : "Not Available"}
+                </Typography>
+              </Stack>
+            </Box>
+          </Grid>
+          <Grid item xs>
+            <Grid container direction="row-reverse">
+              <Grid item>
+                <Stack direction="row" alignItems="center">
+                  <SvgIcon>
+                    <EditIcon />
+                  </SvgIcon>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container alignItems="center">
+          <Grid item>
+            <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+              <Stack
+                sx={{ textDecoration: "none", margin: 0 }}
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                gap={1}
+                ml={8}
+              >
+                <SvgIcon>
+                  <InstagramIcon />
+                </SvgIcon>
+                <Typography align="left" color="#000" variant="body2">
+                  {userContext.instagram
+                    ? userContext.instagram
+                    : "Not Available"}
+                </Typography>
+              </Stack>
+            </Box>
+          </Grid>
+          <Grid item xs>
+            <Grid container direction="row-reverse">
+              <Grid item>
+                <Stack direction="row" alignItems="center">
+                  <SvgIcon>
+                    <EditIcon />
+                  </SvgIcon>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container alignItems="center">
+          <Grid item>
+            <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
+              <Stack
+                sx={{ textDecoration: "none", margin: 0 }}
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                gap={1}
+                ml={8}
+              >
+                <SvgIcon>
+                  <LinkedInIcon />
+                </SvgIcon>
+                <Typography align="left" color="#000" variant="body2">
+                  {userContext.linkedin
+                    ? userContext.linkedin
+                    : "Not Available"}
+                </Typography>
+              </Stack>
+            </Box>
+          </Grid>
+          <Grid item xs>
+            <Grid container direction="row-reverse">
+              <Grid item>
+                <Stack direction="row" alignItems="center">
+                  <SvgIcon>
+                    <EditIcon />
+                  </SvgIcon>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </Box>
     </Modal>
   );

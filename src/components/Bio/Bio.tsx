@@ -78,7 +78,7 @@ const Bio = (props: any) => {
         MY PAGES
       </Typography>
 
-      {userContext.facebook != "" && (
+      {userContext.facebook !== "" && (
         <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
           <Stack
             sx={{ textDecoration: "none", margin: 0 }}
@@ -98,7 +98,7 @@ const Bio = (props: any) => {
         </Box>
       )}
 
-      {userContext.instagram != "" && (
+      {userContext.instagram !== "" && (
         <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
           <Stack
             sx={{ textDecoration: "none", margin: 0 }}
@@ -118,7 +118,7 @@ const Bio = (props: any) => {
         </Box>
       )}
 
-      {userContext.linkedin != "" && (
+      {userContext.linkedin !== "" && (
         <Box my={1} sx={{ display: "flex", justifyContent: "flex-start" }}>
           <Stack
             sx={{ textDecoration: "none", margin: 0 }}

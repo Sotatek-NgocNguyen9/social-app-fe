@@ -17,6 +17,7 @@ import { ReactComponent as WatchIcon } from "../../assets/svg/watch.svg";
 import { ReactComponent as MarketplaceIcon } from "../../assets/svg/marketplace.svg";
 import { ReactComponent as GroupIcon } from "../../assets/svg/group.svg";
 import AuthContext from "../../contexts/auth-context";
+import { API_URL } from "../../common/common.constants";
 
 const Header = () => {
   const userContext = useContext(UserContext);
@@ -127,7 +128,7 @@ const Header = () => {
           >
             <Avatar
               onClick={authContext.logOut}
-              src="/src/assets/defaultAvatar.png"
+              src={`${API_URL}/photo/profile-image/400x${userContext.profileImage}`}
             />
             <Typography onClick={authContext.logOut} color="#000" variant="h6">
               {userContext.name}

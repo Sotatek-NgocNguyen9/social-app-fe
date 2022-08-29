@@ -40,6 +40,7 @@ const Bio = (props: any) => {
       >
         <Grid item justifyContent="center">
           <Avatar
+            key={`${API_URL}/photo/profile-image/200x${userContext.profileImage}`}
             src={`${API_URL}/photo/profile-image/200x${userContext.profileImage}`}
             sx={{ width: 56, height: 56, marginBottom: 0.5 }}
             alt={userContext.name}
@@ -150,7 +151,9 @@ const Bio = (props: any) => {
             width: "100%",
           }}
           color="primary"
-          onClick={() => {props.setShowBioModal(true)}}
+          onClick={() => {
+            props.setShowBioModal(true);
+          }}
         >
           Edit
         </Button>

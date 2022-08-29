@@ -23,12 +23,55 @@ const updateProfilePic = async (file: any) => {
   return await http.put("/user/update-profile", formData);
 }
 
+const updateName = async (name: string) => {
+  let formData = new FormData();
+  formData.append("name", name);
+  return await http.put("/user/update-profile", formData);
+};
+
+const updateLocation = async (location: string) => {
+  let formData = new FormData();
+  formData.append("location", location);
+  return await http.put("/user/update-profile", formData);
+}
+
+const updateBio = async (bio: string) => {
+  let formData = new FormData();
+  formData.append("bio", bio);
+  return await http.put("/user/update-profile", formData);
+}
+
+const updateFacebook = async (facebook: string) => {
+  let formData = new FormData();
+  formData.append("facebook", facebook);
+  return await http.put("/user/update-profile", formData);
+}
+
+const updateInstagram = async (instagram: string) => {
+  let formData = new FormData();
+  formData.append("instagram", instagram);
+  return await http.put("/user/update-profile", formData);
+}
+
+const updateLinkedin = async (linkedin: string) => {
+  let formData = new FormData();
+  formData.append("linkedin", linkedin);
+  return await http.put("/user/update-profile", formData);
+}
+
+
 const UserService = {
   signUp,
   resetPassword,
   resendConfirmEmail,
   getMe,
-  updateProfilePic
+  updateProfilePic,
+  updateName,
+  updateLocation,
+  updateBio,
+  updateFacebook,
+  updateInstagram,
+  updateLinkedin,
 };
 
 export default UserService;

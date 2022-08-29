@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserContext = React.createContext({
-  userId: null,
+  userId: 0,
   username: "",
   name: "",
   email: "",

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../hooks/use-local-storage";
 import AuthService from "../services/auth.service";
@@ -12,9 +12,12 @@ const AuthContextProvider = (props: any) => {
     false
   );
 
-  const setAuthenticatedState = useCallback((state: boolean) => {
-    setAuthenticated(state);
-  }, []);
+  const setAuthenticatedState = useCallback(
+    (state: boolean) => {
+      setAuthenticated(state);
+    },
+    [setAuthenticated]
+  );
 
   const generateNewAccessToken = useCallback(async () => {
     AuthService.generateNewAccessToken().catch((error) => {
@@ -26,13 +29,18 @@ const AuthContextProvider = (props: any) => {
         });
       }
     });
-  }, []);
+  }, [navigate, setAuthenticatedState]);
 
   const logOut = useCallback(async () => {
-    await setAuthenticatedState(false);
-    await AuthService.logOut();
-    await navigate("/sign-in");
-  }, []);
+    
+    AuthService.logOut().then(() => {
+      navigate("/sign-in");
+      setAuthenticatedState(false);
+    }).catch(() => {
+      navigate("/sign-in");
+      setAuthenticatedState(false);
+    });
+  }, [navigate, setAuthenticatedState]);
 
   const authContext = useMemo(() => {
     return {

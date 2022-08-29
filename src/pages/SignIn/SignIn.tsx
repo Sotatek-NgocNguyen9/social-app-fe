@@ -18,7 +18,7 @@ const SignIn = () => {
           </Box>
           <Box mb={1}>
             <Typography color="#4D4D4D" variant="h6">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Typography
                 variant="h6"
                 color="secondary"

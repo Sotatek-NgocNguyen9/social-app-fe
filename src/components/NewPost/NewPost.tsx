@@ -8,11 +8,12 @@ import { ReactComponent as VideoIcon } from '../../assets/svg/video.svg';
 import { ReactComponent as AttachmentIcon } from '../../assets/svg/attachment.svg';
 import { ReactComponent as HashtagIcon } from '../../assets/svg/hashtag.svg';
 
-const NewPost = () => {
+const NewPost = (props: any) => {
   const userContext = useContext(UserContext);
 
   return (
     <Paper
+      onClick={() => props.setNewPostModal(true)}
       elevation={0}
       sx={{
         backgroundColor: appTheme.palette.mode === 'dark' ? '#1A2027' : '#fff',

@@ -22,7 +22,7 @@ const VerifySignUp = () => {
           }
           setIsLoading(false);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsLoading(false);
         });
     }
@@ -38,7 +38,7 @@ const VerifySignUp = () => {
             {!isLoading ? (
               verified ? (
                 <Box my={2}>
-                  <Typography>Your account has been verified! Let's sign in.</Typography>
+                  <Typography>Your account has been verified! Let&apos;s sign in.</Typography>
                   <Button
                     style={{
                       marginTop: '20px',
@@ -57,7 +57,8 @@ const VerifySignUp = () => {
               ) : (
                 <Box my={2}>
                   <Typography>
-                    Your account can't be verified. Please login to get a new verification email!
+                    Your account can&apos;t be verified. Please login to get a new verification
+                    email!
                   </Typography>
                 </Box>
               )

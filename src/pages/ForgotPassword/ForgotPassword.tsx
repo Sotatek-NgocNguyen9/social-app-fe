@@ -33,7 +33,7 @@ const ForgotPassword = () => {
           }}>
           <Typography variant="h3">Oh no...</Typography>
           <Typography sx={{ mt: 2 }}>
-            There's no email with that address. Please try again.
+            There&apos;s no email with that address. Please try again.
           </Typography>
           <Button
             style={{

@@ -5,6 +5,7 @@ import BioModal from '../../components/BioModel/BioModal';
 import Birthday from '../../components/Birthday/Birthday';
 import FriendReq from '../../components/FriendReq/FriendReq';
 import NewPost from '../../components/NewPost/NewPost';
+import NewPostModal from '../../components/NewPostModal/NewPostModal';
 import useHome from '../../hooks/use-home';
 
 const Home = () => {
@@ -22,6 +23,10 @@ const Home = () => {
     <Box position="fixed" width="100%">
       <Header />
       <BioModal showBioModal={showBioModal} handleCloseBioModal={handleCloseBioModal} />
+      <NewPostModal
+        showNewPostModal={showNewPostModal}
+        handleCloseNewPostModal={handleCloseNewPostModal}
+      />
       <Box flex={1} overflow="auto" mt={3} mx={12}>
         <Grid
           container
@@ -33,7 +38,7 @@ const Home = () => {
             <Bio setShowBioModal={setShowBioModal} />
           </Grid>
           <Grid item xs={7} style={{ maxHeight: '100vh', overflow: 'auto' }}>
-            <NewPost />
+            <NewPost setShowNewPostModal={setShowNewPostModal} />
           </Grid>
           <Grid item xs>
             <FriendReq />

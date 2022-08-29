@@ -27,7 +27,7 @@ const BioModal = (props: any) => {
   const userContextSetters = useContext(UserContextSetters);
 
   const inputProfilePictureRef = useRef<HTMLInputElement>(null);
-  const handleShowProfilePicture = (e: any) => {
+  const handleShowProfilePicture = () => {
     inputProfilePictureRef?.current?.click();
   };
   const handleUpdateProfilePicture = (e: any) => {

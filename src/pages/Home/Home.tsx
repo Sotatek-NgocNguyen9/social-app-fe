@@ -1,9 +1,10 @@
 import { Box, Grid } from '@mui/material';
 import Bio from 'src/components/Bio/Bio';
 import Header from 'src/components/Header/Header';
+import MessageModal from 'src/components/MessageModal/MessageModal';
 import BioModal from '../../components/BioModel/BioModal';
-import Birthday from '../../components/Birthday/Birthday';
 import Feed from '../../components/Feed/Feed';
+import FriendList from 'src/components/FriendList/FriendList';
 import FriendReq from '../../components/FriendReq/FriendReq';
 import NewPost from '../../components/NewPost/NewPost';
 import NewPostModal from '../../components/NewPostModal/NewPostModal';
@@ -17,7 +18,10 @@ const Home = () => {
     handleCloseBioModal,
     showNewPostModal,
     setShowNewPostModal,
-    handleCloseNewPostModal
+    handleCloseNewPostModal,
+    showMessageModal,
+    setShowMessageModal,
+    handleCloseMessageModal
   } = useHome();
 
   console.log(loading);
@@ -30,6 +34,9 @@ const Home = () => {
         showNewPostModal={showNewPostModal}
         handleCloseNewPostModal={handleCloseNewPostModal}
       />
+      <MessageModal
+        showMessageModal={showMessageModal}
+        handleCloseMessageModal={handleCloseMessageModal}></MessageModal>
       <Box flex={1} overflow="auto" mt={3} mx={12}>
         <Grid
           container
@@ -45,8 +52,8 @@ const Home = () => {
             <Feed />
           </Grid>
           <Grid item xs>
-            <FriendReq />
-            <Birthday />
+            <FriendReq setShowMessageModal={setShowMessageModal} />
+            <FriendList></FriendList>
           </Grid>
         </Grid>
       </Box>

@@ -39,6 +39,18 @@ const useHome = () => {
     setShowNewPostModal(false);
   };
 
+  const [showMessageModal, setShowMessageModal] = useState({
+    message: '',
+    error: ''
+  });
+
+  const handleCloseMessageModal = () => {
+    setShowMessageModal({
+      message: '',
+      error: ''
+    });
+  };
+
   return {
     loading,
     showBioModal,
@@ -46,7 +58,10 @@ const useHome = () => {
     handleCloseBioModal,
     showNewPostModal,
     setShowNewPostModal,
-    handleCloseNewPostModal
+    handleCloseNewPostModal,
+    showMessageModal,
+    setShowMessageModal,
+    handleCloseMessageModal
   };
 };
 

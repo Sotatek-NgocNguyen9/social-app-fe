@@ -59,6 +59,10 @@ const updateLinkedin = async (linkedin: string) => {
   return await http.put('/user/update-profile', formData);
 };
 
+const getUserById = async (query: string) => {
+  return await http.get(`/user/get-user-by-id/${query}`);
+};
+
 const UserService = {
   signUp,
   resetPassword,
@@ -70,7 +74,8 @@ const UserService = {
   updateBio,
   updateFacebook,
   updateInstagram,
-  updateLinkedin
+  updateLinkedin,
+  getUserById
 };
 
 export default UserService;

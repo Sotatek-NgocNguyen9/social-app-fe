@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
+import UserProfile from './pages/UserProfile/UserProfile';
 import VerifyResetPassword from './pages/VerifyResetPassword/VerifyResetPassword';
 import VerifySignUp from './pages/VerifySignUp/VerifySignUp';
 
@@ -16,6 +17,14 @@ const Routes = () => {
         element={
           <ProtectedRoute>
             <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/user-profile"
+        element={
+          <ProtectedRoute>
+            <UserProfile />
           </ProtectedRoute>
         }
       />

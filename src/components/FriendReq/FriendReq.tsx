@@ -18,7 +18,7 @@ const FriendReq = (props: any) => {
     friendService.default
       .getRequestList({
         page: 1,
-        pageSize: 5
+        pageSize: 3
       })
       .then((res) => {
         setFriendRequests([...res.data]);
@@ -61,29 +61,39 @@ const FriendReq = (props: any) => {
       });
   }
 
-  if (friendRequests.length != 0) {
-    return (
-      <Paper
-        elevation={0}
-        sx={{
-          backgroundColor: appTheme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-          padding: appTheme.spacing(1),
-          textAlign: 'center',
-          borderRadius: 8,
-          height: '40vh',
-          marginBottom: 2
-        }}>
+  return (
+    <Paper
+      elevation={0}
+      sx={{
+        backgroundColor: appTheme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        padding: appTheme.spacing(1),
+        textAlign: 'center',
+        borderRadius: 8,
+        height: '40vh',
+        marginBottom: 2
+      }}>
+      <div style={{ padding: '16px' }}>
+        <Typography>Friend Request</Typography>
+        <div
+          style={{
+            height: '1px',
+            width: '100%',
+            backgroundColor: '#F1F1F1',
+            margin: '4px 0',
+            color: '#F1F1F1'
+          }}></div>
+        {!friendRequests.length ? (
+          <Typography style={{ fontSize: '.9rem' }}>none</Typography>
+        ) : null}
         {friendRequests.map((item: IFriendRequest, index: number) => {
           return (
-            <div
-              key={index + Math.random()}
-              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div
                 style={{ height: '41px', width: '41px', borderRadius: '50%', overflow: 'hidden' }}>
                 <img
                   src={
                     item.profileImage
-                      ? `${API_URL}/profile-image/${item.profileImage}`
+                      ? `${API_URL}/photo/profile-image/${item.profileImage}`
                       : defaultAvatar
                   }
                   alt="profile"
@@ -123,11 +133,9 @@ const FriendReq = (props: any) => {
             </div>
           );
         })}
-      </Paper>
-    );
-  } else {
-    return null;
-  }
+      </div>
+    </Paper>
+  );
 };
 
 export default FriendReq;

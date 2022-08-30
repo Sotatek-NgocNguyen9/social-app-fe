@@ -23,8 +23,6 @@ const useHome = () => {
     }, 1000);
   }, [userContextSetters]);
 
-  console.log(postContext.posts);
-
   const [loading, setLoading] = useState(true);
 
   const [showBioModal, setShowBioModal] = useState(false);

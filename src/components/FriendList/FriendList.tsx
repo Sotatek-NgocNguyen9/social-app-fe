@@ -88,6 +88,7 @@ const FriendList = () => {
       </div>
     </Paper>
   );
+
 };
 
 export default FriendList;

@@ -1,21 +1,29 @@
 import { useContext, useEffect, useState } from 'react';
+import AuthContext from '../contexts/auth-context';
+import PostContext from '../contexts/post-context';
 import UserContextSetters from '../contexts/user-context-setters';
-// import AuthContext from "../../contexts/auth-context";
 
 const useHome = () => {
   const userContextSetters = useContext(UserContextSetters);
-  // const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+  const postContext = useContext(PostContext);
 
   useEffect(() => {
     const fetchUser = async () => {
-      // await authContext.generateNewAccessToken();
-      await userContextSetters.setUser();
+      authContext.generateNewAccessToken();
+      userContextSetters.setUser();
+    };
+    const fetchFeed = async () => {
+      postContext.getFeed();
     };
     setTimeout(() => {
       fetchUser().catch(console.error);
+      fetchFeed().catch(console.error);
       setLoading(false);
     }, 1000);
   }, [userContextSetters]);
+
+  console.log(postContext.posts);
 
   const [loading, setLoading] = useState(true);
 

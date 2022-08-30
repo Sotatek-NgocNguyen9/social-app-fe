@@ -2,11 +2,13 @@ import { useFormik } from 'formik';
 import { useContext, useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import IPost from '../common/interfaces/post.interface';
+import PostContext from '../contexts/post-context';
 import UserContext from '../contexts/user-context';
 import PostService from '../services/post.service';
 
 const useNewPostModal = () => {
   const userContext = useContext(UserContext);
+  const postContext = useContext(PostContext);
 
   const [image, setImage] = useState(null);
   const [imageDataURL, setImageDataURL] = useState(undefined);
@@ -39,7 +41,7 @@ const useNewPostModal = () => {
         .max(100, "Your post content shouldn't exceed 200 characters")
         .required('Post content is required')
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       let payload: IPost = {
         secure: '',
         content: ''
@@ -55,8 +57,11 @@ const useNewPostModal = () => {
             content: values.content
           });
       PostService.createPost(payload).then(() => {
+        resetForm();
+        setImage(null);
+        setImageDataURL(undefined);
         setTimeout(() => {
-          console.log('ok');
+          postContext.getFeed();
         }, 200);
       });
     }

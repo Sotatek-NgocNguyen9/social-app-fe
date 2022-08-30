@@ -3,6 +3,7 @@ import Bio from 'src/components/Bio/Bio';
 import Header from 'src/components/Header/Header';
 import BioModal from '../../components/BioModel/BioModal';
 import Birthday from '../../components/Birthday/Birthday';
+import Feed from '../../components/Feed/Feed';
 import FriendReq from '../../components/FriendReq/FriendReq';
 import NewPost from '../../components/NewPost/NewPost';
 import NewPostModal from '../../components/NewPostModal/NewPostModal';
@@ -41,6 +42,7 @@ const Home = () => {
           </Grid>
           <Grid item xs={7} style={{ maxHeight: '100vh', overflow: 'auto' }}>
             <NewPost setShowNewPostModal={setShowNewPostModal} />
+            <Feed />
           </Grid>
           <Grid item xs>
             <FriendReq />

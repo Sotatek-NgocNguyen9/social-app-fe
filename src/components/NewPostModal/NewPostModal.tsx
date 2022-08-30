@@ -24,6 +24,12 @@ const NewPostModal = (props: any) => {
     handleUploadPicture
   } = useNewPostModal();
 
+  const handleSubmitPost = (e: any) => {
+    e.preventDefault();
+    postFormik.handleSubmit();
+    props.handleCloseNewPostModal();
+  };
+
   return (
     <Modal open={props.showNewPostModal} onClose={props.handleCloseNewPostModal}>
       <Box
@@ -66,7 +72,7 @@ const NewPostModal = (props: any) => {
             </Typography>
           </Box>
         </Stack>
-        <form onSubmit={postFormik.handleSubmit}>
+        <form onSubmit={handleSubmitPost}>
           <input
             type="file"
             accept="image/*"
@@ -74,6 +80,7 @@ const NewPostModal = (props: any) => {
             ref={inputPictureRef}
             style={{ display: 'none' }}
             onChange={handleUploadPicture}
+            key={imageDataURL}
           />
           <TextField
             sx={{

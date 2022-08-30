@@ -18,7 +18,7 @@ const Feed = () => {
         marginBottom: 2
       }}>
       {postContext.posts.map((post) => (
-        <Post post={post} key={post.toString()} />
+        <Post post={post} key={post.toString().concat(Math.random().toString())} />
       ))}
     </Paper>
   );

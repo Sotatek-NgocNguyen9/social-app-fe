@@ -27,17 +27,16 @@ function PeopleItem({ peopleItem }: { peopleItem: IPeople }) {
       <div
         style={{
           width: '100%',
-          height: '180px',
           overflow: 'hidden',
           display: 'flex',
           justifyContent: 'center'
         }}>
         <img
           alt="profile"
-          style={{ maxWidth: '100%', objectFit: 'cover', borderRadius: '8px 8px 0px 0px' }}
+          style={{ width: '50%', objectFit: 'contain', borderRadius: '8px 8px 0px 0px' }}
           src={
             peopleItem.profileImage
-              ? `${API_URL}/profile-image/${peopleItem.profileImage}`
+              ? `${API_URL}/photo/profile-image/400x${peopleItem.profileImage}`
               : defaultAvatar
           }></img>
       </div>
@@ -83,18 +82,17 @@ function ExplorePeople() {
   }, []);
 
   return (
-    <div style={{ paddingTop: '24px', display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div
         style={{
           width: '100%',
-          padding: '16px',
           boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',
-          gap: '16px',
-          position: 'relative'
+          position: 'relative',
+          marginBottom: '16px'
         }}>
-        <div style={{ backgroundColor: 'white', borderRadius: '16px', padding: '16px' }}>
+        <div style={{ backgroundColor: 'white', borderRadius: '24px', padding: '16px' }}>
           <Typography style={{ textAlign: 'center', color: 'rgb(100, 100, 100)' }}>
             People you may know
           </Typography>

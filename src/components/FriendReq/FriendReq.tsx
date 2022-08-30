@@ -1,4 +1,4 @@
-import { Paper, Typography, Button, IconButton } from '@mui/material';
+import { Paper, Typography, Button, IconButton, Stack } from '@mui/material';
 import React, { useEffect } from 'react';
 import { IFriendRequest } from 'src/common/interfaces/friend.interface';
 import { appTheme } from '../../themes/theme';
@@ -89,7 +89,7 @@ const FriendReq = (props: any) => {
           return (
             <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div
-                style={{ height: '41px', width: '41px', borderRadius: '50%', overflow: 'hidden' }}>
+                style={{ height: '42px', width: '42px', borderRadius: '50%', overflow: 'hidden' }}>
                 <img
                   src={
                     item.profileImage
@@ -107,11 +107,17 @@ const FriendReq = (props: any) => {
                   onClick={() => {
                     navigate('/user-profile?userId=' + item.userId);
                   }}>
-                  <Typography style={{ fontSize: '1rem', fontWeight: '600', color: 'black' }}>
+                  <Typography
+                    style={{
+                      marginLeft: '6px',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      color: 'black'
+                    }}>
                     {item.name ? item.name : 'New User'}
                   </Typography>
                 </Button>
-                <div>
+                <Stack direction="row" alignItems="center">
                   <IconButton
                     onClick={() => handleAcceptFriend(item.userId)}
                     color="secondary"
@@ -128,7 +134,7 @@ const FriendReq = (props: any) => {
                     aria-label="add an alarm">
                     <CancelIcon fontSize="inherit" style={{ color: '#FE6F82' }}></CancelIcon>
                   </IconButton>
-                </div>
+                </Stack>
               </div>
             </div>
           );

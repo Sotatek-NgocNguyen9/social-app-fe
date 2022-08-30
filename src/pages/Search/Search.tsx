@@ -59,8 +59,7 @@ function UserProfile() {
           display: 'flex',
           flexDirection: 'row',
           position: 'relative',
-          minHeight: '100vh',
-          paddingTop: '64px'
+          minHeight: '100vh'
         }}>
         <div style={{ flex: '2' }}></div>
         <div style={{ flex: '3.5' }}>
@@ -68,14 +67,13 @@ function UserProfile() {
             <div
               style={{
                 width: '100%',
-                padding: '16px',
+                // padding: '16px',
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '16px'
               }}>
-              <div style={{ backgroundColor: 'white', padding: '16px', borderRadius: '16px' }}>
-                <Typography>People</Typography>
+              <div style={{ backgroundColor: 'white', padding: '16px', borderRadius: '24px' }}>
                 {userSearch.users.length ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {userSearch.users.map((user: IPeople, index) => {
@@ -124,7 +122,12 @@ function UserProfile() {
                               </Typography>
                             </Button>
                             <Typography
-                              style={{ color: '#ACACAC', fontSize: '.7rem', fontWeight: '500' }}>
+                              style={{
+                                color: '#ACACAC',
+                                fontSize: '.7rem',
+                                fontWeight: '500',
+                                marginLeft: '8px'
+                              }}>
                               {user.mutualFriend} mutual friend
                             </Typography>
                           </div>

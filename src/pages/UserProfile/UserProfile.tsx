@@ -124,8 +124,7 @@ function UserProfile() {
           display: 'flex',
           flexDirection: 'row',
           position: 'relative',
-          minHeight: '100vh',
-          paddingTop: '64px'
+          minHeight: '100vh'
         }}>
         <div style={{ flex: '2' }}></div>
         <div style={{ flex: '3.5' }}>
@@ -133,7 +132,6 @@ function UserProfile() {
             <div
               style={{
                 width: '100%',
-                padding: '16px',
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',

@@ -41,7 +41,7 @@ const Header = () => {
           <Stack
             sx={{ textDecoration: 'none' }}
             component={RouterLink}
-            to="/sign-in"
+            to="/"
             direction="row"
             alignItems="center"
             gap={1}

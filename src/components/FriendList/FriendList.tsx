@@ -1,4 +1,4 @@
-import { Paper, Typography, Button } from '@mui/material';
+import { Paper, Typography, Button, Stack } from '@mui/material';
 import React, { useEffect } from 'react';
 import { IFriend } from 'src/common/interfaces/friend.interface';
 import { appTheme } from '../../themes/theme';
@@ -77,9 +77,9 @@ const FriendList = () => {
                       {item.name ? item.name : 'New User'}
                     </Typography>
                   </Button>
-                  <div>
+                  <Stack direction="row" alignItems="center" justifyContent="left">
                     <Typography>Ha Noi</Typography>
-                  </div>
+                  </Stack>
                 </div>
               </div>
             );
@@ -88,7 +88,6 @@ const FriendList = () => {
       </div>
     </Paper>
   );
-
 };
 
 export default FriendList;

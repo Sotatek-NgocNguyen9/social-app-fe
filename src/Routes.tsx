@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp/SignUp';
 import UserProfile from './pages/UserProfile/UserProfile';
 import VerifyResetPassword from './pages/VerifyResetPassword/VerifyResetPassword';
 import VerifySignUp from './pages/VerifySignUp/VerifySignUp';
+import Search from './pages/Search/Search';
 
 const Routes = () => {
   return (
@@ -25,6 +26,14 @@ const Routes = () => {
         element={
           <ProtectedRoute>
             <UserProfile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/search-all"
+        element={
+          <ProtectedRoute>
+            <Search />
           </ProtectedRoute>
         }
       />

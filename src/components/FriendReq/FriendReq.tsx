@@ -18,7 +18,7 @@ const FriendReq = (props: any) => {
     friendService.default
       .getRequestList({
         page: 1,
-        pageSize: 5
+        pageSize: 3
       })
       .then((res) => {
         setFriendRequests([...res.data]);
@@ -72,53 +72,68 @@ const FriendReq = (props: any) => {
         height: '40vh',
         marginBottom: 2
       }}>
-      {friendRequests.map((item: IFriendRequest, index: number) => {
-        return (
-          <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ height: '41px', width: '41px', borderRadius: '50%', overflow: 'hidden' }}>
-              <img
-                src={
-                  item.profileImage
-                    ? `${API_URL}/profile-image/${item.profileImage}`
-                    : defaultAvatar
-                }
-                alt="profile"
-                style={{ maxHeight: '100%' }}></img>
-            </div>
-            <div>
-              {/* hehree */}
-              <Button
-                disableRipple
-                style={{ backgroundColor: 'transparent', textTransform: 'none', padding: '0' }}
-                onClick={() => {
-                  navigate('/user-profile?userId=' + item.userId);
-                }}>
-                <Typography style={{ fontSize: '1rem', fontWeight: '600', color: 'black' }}>
-                  {item.name ? item.name : 'New User'}
-                </Typography>
-              </Button>
+      <div style={{ padding: '16px' }}>
+        <Typography>Friend Request</Typography>
+        <div
+          style={{
+            height: '1px',
+            width: '100%',
+            backgroundColor: '#F1F1F1',
+            margin: '4px 0',
+            color: '#F1F1F1'
+          }}></div>
+        {!friendRequests.length ? (
+          <Typography style={{ fontSize: '.9rem' }}>none</Typography>
+        ) : null}
+        {friendRequests.map((item: IFriendRequest, index: number) => {
+          return (
+            <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div
+                style={{ height: '41px', width: '41px', borderRadius: '50%', overflow: 'hidden' }}>
+                <img
+                  src={
+                    item.profileImage
+                      ? `${API_URL}/photo/profile-image/${item.profileImage}`
+                      : defaultAvatar
+                  }
+                  alt="profile"
+                  style={{ maxHeight: '100%' }}></img>
+              </div>
               <div>
-                <IconButton
-                  onClick={() => handleAcceptFriend(item.userId)}
-                  color="secondary"
-                  size="small"
-                  aria-label="add an alarm">
-                  <CheckCircleIcon
-                    fontSize="inherit"
-                    style={{ color: '#4EDF9A' }}></CheckCircleIcon>
-                </IconButton>
-                <IconButton
-                  onClick={() => handleRefuseFriend(item.userId)}
-                  color="secondary"
-                  size="small"
-                  aria-label="add an alarm">
-                  <CancelIcon fontSize="inherit" style={{ color: '#FE6F82' }}></CancelIcon>
-                </IconButton>
+                {/* hehree */}
+                <Button
+                  disableRipple
+                  style={{ backgroundColor: 'transparent', textTransform: 'none', padding: '0' }}
+                  onClick={() => {
+                    navigate('/user-profile?userId=' + item.userId);
+                  }}>
+                  <Typography style={{ fontSize: '1rem', fontWeight: '600', color: 'black' }}>
+                    {item.name ? item.name : 'New User'}
+                  </Typography>
+                </Button>
+                <div>
+                  <IconButton
+                    onClick={() => handleAcceptFriend(item.userId)}
+                    color="secondary"
+                    size="small"
+                    aria-label="add an alarm">
+                    <CheckCircleIcon
+                      fontSize="inherit"
+                      style={{ color: '#4EDF9A' }}></CheckCircleIcon>
+                  </IconButton>
+                  <IconButton
+                    onClick={() => handleRefuseFriend(item.userId)}
+                    color="secondary"
+                    size="small"
+                    aria-label="add an alarm">
+                    <CancelIcon fontSize="inherit" style={{ color: '#FE6F82' }}></CancelIcon>
+                  </IconButton>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </Paper>
   );
 };

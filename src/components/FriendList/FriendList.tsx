@@ -16,7 +16,7 @@ const FriendList = () => {
     friendService.default
       .getFriendList({
         page: 1,
-        pageSize: 5
+        pageSize: 3
       })
       .then((res) => {
         setFriendList([...res.data]);
@@ -34,38 +34,58 @@ const FriendList = () => {
         height: '40vh',
         marginBottom: 2
       }}>
-      {friendList.map((item: IFriend, index: number) => {
-        return (
-          <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ height: '41px', width: '41px', borderRadius: '50%', overflow: 'hidden' }}>
-              <img
-                src={
-                  item.profileImage
-                    ? `${API_URL}/profile-image/${item.profileImage}`
-                    : defaultAvatar
-                }
-                alt="profile"
-                style={{ maxHeight: '100%' }}></img>
-            </div>
-            <div>
-              {/* hehree */}
-              <Button
-                disableRipple
-                style={{ backgroundColor: 'transparent', textTransform: 'none', padding: '0' }}
-                onClick={() => {
-                  navigate('/user-profile?userId=' + item.userId);
-                }}>
-                <Typography style={{ fontSize: '1rem', fontWeight: '600', color: 'black' }}>
-                  {item.name ? item.name : 'New User'}
-                </Typography>
-              </Button>
-              <div>
-                <Typography>Ha Noi</Typography>
+      <div style={{ padding: '16px' }}>
+        <Typography>Friend List</Typography>
+        <div
+          style={{
+            height: '1px',
+            width: '100%',
+            backgroundColor: '#F1F1F1',
+            margin: '4px 0',
+            color: '#F1F1F1'
+          }}></div>
+        {!friendList.length ? <Typography style={{ fontSize: '.9rem' }}>none</Typography> : null}
+        <div style={{ padding: '16px' }}>
+          {friendList.map((item: IFriend, index: number) => {
+            return (
+              <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div
+                  style={{
+                    height: '41px',
+                    width: '41px',
+                    borderRadius: '50%',
+                    overflow: 'hidden'
+                  }}>
+                  <img
+                    src={
+                      item.profileImage
+                        ? `${API_URL}/photo/profile-image/${item.profileImage}`
+                        : defaultAvatar
+                    }
+                    alt="profile"
+                    style={{ maxHeight: '100%' }}></img>
+                </div>
+                <div>
+                  {/* hehree */}
+                  <Button
+                    disableRipple
+                    style={{ backgroundColor: 'transparent', textTransform: 'none', padding: '0' }}
+                    onClick={() => {
+                      navigate('/user-profile?userId=' + item.userId);
+                    }}>
+                    <Typography style={{ fontSize: '1rem', fontWeight: '600', color: 'black' }}>
+                      {item.name ? item.name : 'New User'}
+                    </Typography>
+                  </Button>
+                  <div>
+                    <Typography>Ha Noi</Typography>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      </div>
     </Paper>
   );
 };

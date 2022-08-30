@@ -1,3 +1,4 @@
+import { IGetAllPostByUserId, ISearchPost } from 'src/common/interfaces/friend.interface';
 import http from '../common/http-common';
 import IPost from '../common/interfaces/post.interface';
 
@@ -17,6 +18,14 @@ const getUserPosts = async () => {
   return await http.post('/post/get-all-of-user', { page: 1, pageSize: 100 });
 };
 
-const PostService = { createPost, getFeed, getUserPosts };
+const searchPost = async (payload: ISearchPost) => {
+  return await http.post('/post/search-post', payload);
+};
+
+const getAllPostByUserId = async (payload: IGetAllPostByUserId) => {
+  return await http.post('/post/get-all-post-by-user-id', payload);
+};
+
+const PostService = { createPost, getFeed, getUserPosts, searchPost, getAllPostByUserId };
 
 export default PostService;

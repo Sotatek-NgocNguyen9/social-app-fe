@@ -1,4 +1,4 @@
-import { Typography, Button, Box } from '@mui/material';
+import { Typography, Button, Box, Paper } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -11,9 +11,14 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
 import * as userService from './../../services/user.service';
+import * as friendService from './../../services/friend.service';
 import Header from './../../components/Header/Header';
 import defaultAvarar from './../../assets/defaultAvatar.png';
 import { API_URL } from './../../common/common.constants';
+import { IGetAllPostByUserId, IpostInfo } from 'src/common/interfaces/friend.interface';
+import useGetAllPostByUserId from 'src/hooks/use-get-post-by-user-id';
+import { appTheme } from '../../themes/theme';
+import Post from './../../components/Post/Post';
 
 interface IUserProfile {
   userId: number;
@@ -43,19 +48,75 @@ function UserProfile() {
     facebook: '',
     instagram: '',
     linkedin: '',
-    relation: '',
+    relation: 'stranger',
     isActivate: false
   });
+  const [postPagination, setPostPagination] = React.useState<IGetAllPostByUserId>({
+    page: 1,
+    pageSize: 3,
+    userId: 0
+  });
+
+  const { getPost } = useGetAllPostByUserId({
+    page: postPagination.page,
+    pageSize: postPagination.pageSize,
+    userId: user.userId
+  });
+
+  const observer = React.useRef<any>(null);
+
+  const lastPostElement = React.useCallback<any>(
+    (node: any) => {
+      if (getPost.loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && getPost.hasMore) {
+          setPostPagination({ ...postPagination, page: postPagination.page + 1 });
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [getPost.loading, getPost.hasMore]
+  );
 
   useEffect(() => {
-    console.log(location.search);
     userService.default.getUserById(location.search).then((res) => {
       setUser({ ...res.data });
     });
   }, [location]);
 
+  function addFriend(strangerId: number) {
+    friendService.default
+      .sendFriendRequest({
+        strangerId: strangerId
+      })
+      .then(() => {
+        setUser({ ...user, relation: 'requesting' });
+      });
+  }
+
+  function removeFriendRequest(requesterId: number) {
+    friendService.default
+      .refuseFriend({
+        requesterId: requesterId
+      })
+      .then(() => {
+        setUser({ ...user, relation: 'stranger' });
+      });
+  }
+
+  function acceptFriendRequest(requesterId: number) {
+    friendService.default
+      .acceptFriend({
+        requesterId: requesterId
+      })
+      .then(() => {
+        setUser({ ...user, relation: 'friend' });
+      });
+  }
+
   return (
-    <Box position="fixed" width="100%">
+    <Box width="100%">
       <Header />
       <div
         style={{
@@ -96,7 +157,7 @@ function UserProfile() {
                     <img
                       src={
                         user.profileImage
-                          ? `${API_URL}/profile-image/${user.profileImage}`
+                          ? `${API_URL}/photo/profile-image/${user.profileImage}`
                           : defaultAvarar
                       }
                       alt="profile"
@@ -116,6 +177,9 @@ function UserProfile() {
                       <Button
                         variant="contained"
                         color="secondary"
+                        onClick={() => {
+                          addFriend(user.userId);
+                        }}
                         style={{ textTransform: 'none' }}
                         startIcon={<PersonAddIcon></PersonAddIcon>}>
                         add friend
@@ -144,6 +208,9 @@ function UserProfile() {
                         <Button
                           variant="contained"
                           color="secondary"
+                          onClick={() => {
+                            acceptFriendRequest(user.userId);
+                          }}
                           style={{ textTransform: 'none' }}
                           startIcon={<GroupAddIcon></GroupAddIcon>}>
                           Accept friend
@@ -152,6 +219,9 @@ function UserProfile() {
                           variant="contained"
                           color="secondary"
                           style={{ textTransform: 'none' }}
+                          onClick={() => {
+                            removeFriendRequest(user.userId);
+                          }}
                           startIcon={<GroupRemoveIcon></GroupRemoveIcon>}>
                           Refuse Friend
                         </Button>
@@ -221,6 +291,41 @@ function UserProfile() {
                 </div>
               </div>
               {/* posts here */}
+              <Paper
+                elevation={0}
+                sx={{
+                  backgroundColor: appTheme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                  padding: appTheme.spacing(3),
+                  textAlign: 'center',
+                  borderRadius: 8,
+                  marginBottom: 2
+                }}>
+                {getPost.posts.map((post: IpostInfo, index: number) => {
+                  if (getPost.posts.length === index + 1) {
+                    return (
+                      <div
+                        ref={lastPostElement}
+                        key={index}
+                        style={{
+                          backgroundColor: 'white',
+                          borderRadius: '16px',
+                          textAlign: 'center'
+                        }}>
+                        <Post style={{ backgroundColor: 'white' }} post={post}></Post>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        ref={lastPostElement}
+                        key={index}
+                        style={{ backgroundColor: 'white', borderRadius: '16px' }}>
+                        <Post style={{ backgroundColor: 'white' }} post={post}></Post>
+                      </div>
+                    );
+                  }
+                })}
+              </Paper>
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { ISearchUser } from 'src/common/interfaces/friend.interface';
 import http from '../common/http-common';
 import IAuth from '../common/interfaces/auth.interface';
 
@@ -63,6 +64,10 @@ const getUserById = async (query: string) => {
   return await http.get(`/user/get-user-by-id/${query}`);
 };
 
+const searchUser = async (payload: ISearchUser) => {
+  return await http.post(`user/search-user/`, payload);
+};
+
 const UserService = {
   signUp,
   resetPassword,
@@ -75,6 +80,7 @@ const UserService = {
   updateFacebook,
   updateInstagram,
   updateLinkedin,
+  searchUser,
   getUserById
 };
 

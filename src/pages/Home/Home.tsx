@@ -9,6 +9,7 @@ import FriendReq from '../../components/FriendReq/FriendReq';
 import NewPost from '../../components/NewPost/NewPost';
 import NewPostModal from '../../components/NewPostModal/NewPostModal';
 import useHome from '../../hooks/use-home';
+import ExplorePeople from 'src/components/ExplorePeople/ExplorePeople';
 
 const Home = () => {
   const {
@@ -23,8 +24,6 @@ const Home = () => {
     setShowMessageModal,
     handleCloseMessageModal
   } = useHome();
-
-  console.log(loading);
 
   return (
     <Box position="fixed" width="100%">
@@ -49,6 +48,7 @@ const Home = () => {
           </Grid>
           <Grid item xs={7} style={{ maxHeight: '100vh', overflow: 'auto' }}>
             <NewPost setShowNewPostModal={setShowNewPostModal} />
+            <ExplorePeople></ExplorePeople>
             <Feed />
           </Grid>
           <Grid item xs>
